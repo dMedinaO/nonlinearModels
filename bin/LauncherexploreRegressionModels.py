@@ -134,10 +134,10 @@ if (processData.validatePath(args.pathResult) == 0):
 
                     #obtenemos el restante de performance
                     #usamos el modelo para predecir los elementos y comparamos con respecto al valor del testing
-                    predictedValues = AdaBoostObject.AdaBoostModel.predict(dataSetTesting).tolist()
-                    rscore = AdaBoostObject.AdaBoostModel.score(dataSetTesting, classTesting)
+                    predictedValues = AdaBoostObject.AdaBoostModel.predict(dataSetTraining).tolist()
+                    rscore = AdaBoostObject.AdaBoostModel.score(dataSetTraining, classTraining)
 
-                    performanceValues = performanceData.performancePrediction(classTesting, predictedValues)
+                    performanceValues = performanceData.performancePrediction(classTraining, predictedValues)
                     pearsonValue = performanceValues.calculatedPearson()['pearsonr']
                     spearmanValue = performanceValues.calculatedSpearman()['spearmanr']
                     kendalltauValue = performanceValues.calculatekendalltau()['kendalltau']
@@ -157,8 +157,6 @@ if (processData.validatePath(args.pathResult) == 0):
                 except:
                     iteracionesIncorrectas+=1
                     pass
-                break
-            break
 
         #Baggin
         for bootstrap in [True, False]:
@@ -168,10 +166,10 @@ if (processData.validatePath(args.pathResult) == 0):
                     bagginObject = Baggin.Baggin(dataSetTraining, classTraining, n_estimators, bootstrap)
                     bagginObject.trainingMethod()
 
-                    predictedValues = bagginObject.bagginModel.predict(dataSetTesting).tolist()
-                    rscore = bagginObject.bagginModel.score(dataSetTesting, classTesting)
+                    predictedValues = bagginObject.bagginModel.predict(dataSetTraining).tolist()
+                    rscore = bagginObject.bagginModel.score(dataSetTraining, classTraining)
 
-                    performanceValues = performanceData.performancePrediction(classTesting, predictedValues)
+                    performanceValues = performanceData.performancePrediction(classTraining, predictedValues)
                     pearsonValue = performanceValues.calculatedPearson()['pearsonr']
                     spearmanValue = performanceValues.calculatedSpearman()['spearmanr']
                     kendalltauValue = performanceValues.calculatekendalltau()['kendalltau']
@@ -192,8 +190,6 @@ if (processData.validatePath(args.pathResult) == 0):
                 except:
                     iteracionesIncorrectas+=1
                     pass
-                break
-            break
 
         #DecisionTree
         for criterion in ['mse', 'friedman_mse', 'mae']:
@@ -203,10 +199,10 @@ if (processData.validatePath(args.pathResult) == 0):
                     decisionTreeObject = DecisionTree.DecisionTree(dataSetTraining, classTraining, criterion, splitter)
                     decisionTreeObject.trainingMethod()
 
-                    predictedValues = decisionTreeObject.DecisionTreeAlgorithm.predict(dataSetTesting).tolist()
-                    rscore = decisionTreeObject.DecisionTreeAlgorithm.score(dataSetTesting, classTesting)
+                    predictedValues = decisionTreeObject.DecisionTreeAlgorithm.predict(dataSetTraining).tolist()
+                    rscore = decisionTreeObject.DecisionTreeAlgorithm.score(dataSetTraining, classTraining)
 
-                    performanceValues = performanceData.performancePrediction(classTesting, predictedValues)
+                    performanceValues = performanceData.performancePrediction(classTraining, predictedValues)
                     pearsonValue = performanceValues.calculatedPearson()['pearsonr']
                     spearmanValue = performanceValues.calculatedSpearman()['spearmanr']
                     kendalltauValue = performanceValues.calculatekendalltau()['kendalltau']
@@ -226,8 +222,6 @@ if (processData.validatePath(args.pathResult) == 0):
                 except:
                     iteracionesIncorrectas+=1
                     pass
-                break
-            break
 
         #gradiente
         for loss in ['ls', 'lad', 'huber', 'quantile']:
@@ -240,10 +234,10 @@ if (processData.validatePath(args.pathResult) == 0):
                                 gradientObject = Gradient.Gradient(dataSetTraining,classTraining,n_estimators, loss, criterion, min_samples_split, min_samples_leaf)
                                 gradientObject.trainingMethod()
 
-                                predictedValues = gradientObject.GradientAlgorithm.predict(dataSetTesting).tolist()
-                                rscore = gradientObject.GradientAlgorithm.score(dataSetTesting, classTesting)
+                                predictedValues = gradientObject.GradientAlgorithm.predict(dataSetTraining).tolist()
+                                rscore = gradientObject.GradientAlgorithm.score(dataSetTraining, classTraining)
 
-                                performanceValues = performanceData.performancePrediction(classTesting, predictedValues)
+                                performanceValues = performanceData.performancePrediction(classTraining, predictedValues)
                                 pearsonValue = performanceValues.calculatedPearson()['pearsonr']
                                 spearmanValue = performanceValues.calculatedSpearman()['spearmanr']
                                 kendalltauValue = performanceValues.calculatekendalltau()['kendalltau']
@@ -263,11 +257,6 @@ if (processData.validatePath(args.pathResult) == 0):
                             except:
                                 iteracionesIncorrectas+=1
                                 pass
-                            break
-                        break
-                    break
-                break
-            break
 
         #knn
         for n_neighbors in range(1,11):
@@ -279,10 +268,10 @@ if (processData.validatePath(args.pathResult) == 0):
                             knnObect = knn_regression.KNN_Model(dataSetTraining, classTraining, n_neighbors, algorithm, metric,  weights)
                             knnObect.trainingMethod()
 
-                            predictedValues = knnObect.KNN_model.predict(dataSetTesting).tolist()
-                            rscore = knnObect.KNN_model.score(dataSetTesting, classTesting)
+                            predictedValues = knnObect.KNN_model.predict(dataSetTraining).tolist()
+                            rscore = knnObect.KNN_model.score(dataSetTraining, classTraining)
 
-                            performanceValues = performanceData.performancePrediction(classTesting, predictedValues)
+                            performanceValues = performanceData.performancePrediction(classTraining, predictedValues)
                             pearsonValue = performanceValues.calculatedPearson()['pearsonr']
                             spearmanValue = performanceValues.calculatedSpearman()['spearmanr']
                             kendalltauValue = performanceValues.calculatekendalltau()['kendalltau']
@@ -302,10 +291,7 @@ if (processData.validatePath(args.pathResult) == 0):
                         except:
                             iteracionesIncorrectas+=1
                             pass
-                        break
-                    break
-                break
-            break
+
 
         #NuSVR
         for kernel in ['rbf', 'linear', 'poly', 'sigmoid', 'precomputed']:
@@ -317,10 +303,10 @@ if (processData.validatePath(args.pathResult) == 0):
                             nuSVM = NuSVR.NuSVRModel(dataSetTraining, classTraining, kernel, degree, gamma, nu)
                             nuSVM.trainingMethod()
 
-                            predictedValues = nuSVM.SVRAlgorithm.predict(dataSetTesting).tolist()
-                            rscore = nuSVM.SVRAlgorithm.score(dataSetTesting, classTesting)
+                            predictedValues = nuSVM.SVRAlgorithm.predict(dataSetTraining).tolist()
+                            rscore = nuSVM.SVRAlgorithm.score(dataSetTraining, classTraining)
 
-                            performanceValues = performanceData.performancePrediction(classTesting, predictedValues)
+                            performanceValues = performanceData.performancePrediction(classTraining, predictedValues)
                             pearsonValue = performanceValues.calculatedPearson()['pearsonr']
                             spearmanValue = performanceValues.calculatedSpearman()['spearmanr']
                             kendalltauValue = performanceValues.calculatekendalltau()['kendalltau']
@@ -340,10 +326,7 @@ if (processData.validatePath(args.pathResult) == 0):
                         except:
                             iteracionesIncorrectas+=1
                             pass
-                        break
-                    break
-                break
-            break
+
 
         #SVC
         for kernel in ['rbf', 'linear', 'poly', 'sigmoid', 'precomputed']:
@@ -354,10 +337,10 @@ if (processData.validatePath(args.pathResult) == 0):
                         svm = SVR.SVRModel(dataSetTraining, classTraining, kernel, degree, gamma)
                         svm.trainingMethod()
 
-                        predictedValues = svm.SVRAlgorithm.predict(dataSetTesting).tolist()
-                        rscore = svm.SVRAlgorithm.score(dataSetTesting, classTesting)
+                        predictedValues = svm.SVRAlgorithm.predict(dataSetTraining).tolist()
+                        rscore = svm.SVRAlgorithm.score(dataSetTraining, classTraining)
 
-                        performanceValues = performanceData.performancePrediction(classTesting, predictedValues)
+                        performanceValues = performanceData.performancePrediction(classTraining, predictedValues)
                         pearsonValue = performanceValues.calculatedPearson()['pearsonr']
                         spearmanValue = performanceValues.calculatedSpearman()['spearmanr']
                         kendalltauValue = performanceValues.calculatekendalltau()['kendalltau']
@@ -377,9 +360,7 @@ if (processData.validatePath(args.pathResult) == 0):
                     except:
                         iteracionesIncorrectas+=1
                         pass
-                    break
-                break
-            break
+
 
         for n_estimators in [10,50,100,200,500,1000,1500,2000]:
             for criterion in ['mse', 'mae']:
@@ -391,10 +372,10 @@ if (processData.validatePath(args.pathResult) == 0):
                                 rf = RandomForest.RandomForest(dataSetTraining, classTraining, n_estimators, criterion, min_samples_split, min_samples_leaf, bootstrap)
                                 rf.trainingMethod()
 
-                                predictedValues = rf.randomForesModel.predict(dataSetTesting).tolist()
-                                rscore = rf.randomForesModel.score(dataSetTesting, classTesting)
+                                predictedValues = rf.randomForesModel.predict(dataSetTraining).tolist()
+                                rscore = rf.randomForesModel.score(dataSetTraining, classTraining)
 
-                                performanceValues = performanceData.performancePrediction(classTesting, predictedValues)
+                                performanceValues = performanceData.performancePrediction(classTraining, predictedValues)
                                 pearsonValue = performanceValues.calculatedPearson()['pearsonr']
                                 spearmanValue = performanceValues.calculatedSpearman()['spearmanr']
                                 kendalltauValue = performanceValues.calculatekendalltau()['kendalltau']
@@ -414,60 +395,57 @@ if (processData.validatePath(args.pathResult) == 0):
                             except:
                                 iteracionesIncorrectas+=1
                                 pass
-                            break
-                        break
-                    break
-                break
-            break
 
-        #generamos el export de la matriz convirtiendo a data frame
-        dataFrame = pd.DataFrame(matrixResponse, columns=header)
+        try:
+            #generamos el export de la matriz convirtiendo a data frame
+            dataFrame = pd.DataFrame(matrixResponse, columns=header)
 
-        #generamos el nombre del archivo
-        nameFileExport = "%ssummaryProcessJob.csv" % (pathResponse)
-        dataFrame.to_csv(nameFileExport, index=False)
+            #generamos el nombre del archivo
+            nameFileExport = "%ssummaryProcessJob.csv" % (pathResponse)
+            dataFrame.to_csv(nameFileExport, index=False)
 
-        #estimamos los estadisticos resumenes para cada columna en el header
-        #instanciamos el object
-        statisticObject = summaryStatistic.createStatisticSummary(nameFileExport)
-        matrixSummaryStatistic = []
+            #estimamos los estadisticos resumenes para cada columna en el header
+            #instanciamos el object
+            statisticObject = summaryStatistic.createStatisticSummary(nameFileExport)
+            matrixSummaryStatistic = []
 
-        #"Accuracy", "Recall", "Precision", "Neg_log_loss", "F1", "FBeta"
-        matrixSummaryStatistic.append(estimatedStatisticPerformance(statisticObject, 'R_Score'))
-        matrixSummaryStatistic.append(estimatedStatisticPerformance(statisticObject, 'Pearson'))
-        matrixSummaryStatistic.append(estimatedStatisticPerformance(statisticObject, 'Spearman'))
-        matrixSummaryStatistic.append(estimatedStatisticPerformance(statisticObject, 'Kendalltau'))
+            #"Accuracy", "Recall", "Precision", "Neg_log_loss", "F1", "FBeta"
+            matrixSummaryStatistic.append(estimatedStatisticPerformance(statisticObject, 'R_Score'))
+            matrixSummaryStatistic.append(estimatedStatisticPerformance(statisticObject, 'Pearson'))
+            matrixSummaryStatistic.append(estimatedStatisticPerformance(statisticObject, 'Spearman'))
+            matrixSummaryStatistic.append(estimatedStatisticPerformance(statisticObject, 'Kendalltau'))
 
-        #generamos el nombre del archivo
-        dataFrame = pd.DataFrame(matrixSummaryStatistic, columns=['Performance','Mean', 'STD', 'Variance', 'MAX', 'MIN'])
-        nameFileExport2 = "%sstatisticPerformance.csv" % (pathResponse)
-        dataFrame.to_csv(nameFileExport2, index=False)
+            #generamos el nombre del archivo
+            dataFrame = pd.DataFrame(matrixSummaryStatistic, columns=['Performance','Mean', 'STD', 'Variance', 'MAX', 'MIN'])
+            nameFileExport2 = "%sstatisticPerformance.csv" % (pathResponse)
+            dataFrame.to_csv(nameFileExport2, index=False)
 
-        summaryObject = summaryScanProcess.summaryProcessClusteringScan(nameFileExport, pathResponse, ['R_Score', 'Pearson', 'Spearman', 'Kendalltau'])
-        summaryObject.createHistogram()
-        summaryObject.createRankingFile()
+            summaryObject = summaryScanProcess.summaryProcessClusteringScan(nameFileExport, pathResponse, ['R_Score', 'Pearson', 'Spearman', 'Kendalltau'])
+            summaryObject.createHistogram()
+            summaryObject.createRankingFile()
 
-        finishTime = time.time() - start_time
-        termino = datetime.datetime.now()
+            finishTime = time.time() - start_time
+            termino = datetime.datetime.now()
 
-        dictionary = {}
-        dictionary.update({"inicio": str(inicio)})
-        dictionary.update({"termino": str(termino)})
-        dictionary.update({"ejecucion": finishTime})
-        dictionary.update({"iteracionesCorrectas": iteracionesCorrectas})
-        dictionary.update({"iteracionesIncorrectas": iteracionesIncorrectas})
+            dictionary = {}
+            dictionary.update({"inicio": str(inicio)})
+            dictionary.update({"termino": str(termino)})
+            dictionary.update({"ejecucion": finishTime})
+            dictionary.update({"iteracionesCorrectas": iteracionesCorrectas})
+            dictionary.update({"iteracionesIncorrectas": iteracionesIncorrectas})
 
-        dictionary.update({"performanceSelected": args.performance})
+            dictionary.update({"performanceSelected": args.performance})
 
-        #agrego la informacion de los mejores modelos para cada medida de desempeno
-        processModels = processParamsDict.processParams(pathResponse, ['R_Score', 'Pearson', 'Spearman', 'Kendalltau'])
-        processModels.getBestModels()
-        dictionary.update({"modelSelecetd":processModels.listModels})
+            #agrego la informacion de los mejores modelos para cada medida de desempeno
+            processModels = processParamsDict.processParams(pathResponse, ['R_Score', 'Pearson', 'Spearman', 'Kendalltau'])
+            processModels.getBestModels()
+            dictionary.update({"modelSelecetd":processModels.listModels})
 
-        nameFileExport = "%ssummaryProcess.json" % (pathResponse)
-        with open(nameFileExport, 'w') as fp:
-            json.dump(dictionary, fp)
-
+            nameFileExport = "%ssummaryProcess.json" % (pathResponse)
+            with open(nameFileExport, 'w') as fp:
+                json.dump(dictionary, fp)
+        except:
+            print "Error during exec algorithm"
     else:
         print "Data set input not exist, please check the input for name file data set"
 else:
