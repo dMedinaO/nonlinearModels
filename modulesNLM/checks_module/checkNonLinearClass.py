@@ -90,6 +90,9 @@ class checkNonLinearClass(object):
         #generamos una lista con los valores obtenidos...
         header = ["Algorithm", "Params", "Validation", "Accuracy", "Recall", "Precision", "F1"]
         AccuracyList = []
+        PrecisionList = []
+        RecallList = []
+        F1List = []
 
         #NuSVC
         for kernel in ['rbf', 'linear', 'poly', 'sigmoid', 'precomputed']:
@@ -102,6 +105,9 @@ class checkNonLinearClass(object):
                         nuSVM = NuSVM.NuSVM(self.data, self.target, kernel, nu, degree, 0.01, 10)
                         nuSVM.trainingMethod(self.kindDataSet)
                         AccuracyList.append(nuSVM.performanceData.scoreData[3])
+                        PrecisionList.append(nuSVM.performanceData.scoreData[4])
+                        RecallList.append(nuSVM.performanceData.scoreData[5])
+                        F1List.append(nuSVM.performanceData.scoreData[6])
                     except:
                         pass
                     break
@@ -120,6 +126,9 @@ class checkNonLinearClass(object):
                         print params
                         svm.trainingMethod(self.kindDataSet)
                         AccuracyList.append(svm.performanceData.scoreData[3])
+                        PrecisionList.append(nuSVM.performanceData.scoreData[4])
+                        RecallList.append(nuSVM.performanceData.scoreData[5])
+                        F1List.append(nuSVM.performanceData.scoreData[6])
                     except:
                         pass
                     break
@@ -128,6 +137,9 @@ class checkNonLinearClass(object):
 
         try:
             print max(AccuracyList)
+            print max(PrecisionList)
+            print max(RecallList)
+            print max(F1List)
             if max(AccuracyList)<=self.threshold:
                 return 0#no lineal
             else:
