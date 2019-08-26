@@ -1,9 +1,0 @@
-Algorithm,Params,R_Score,Pearson,Spearman,Kendalltau
-Bagging,bootstrap:True-n_estimators:10,0.97354679039,0.986711717327,0.974365209333,0.877570154786
-RandomForestRegressor,n_estimators:10-criterion:mse-min_samples_split:2-min_samples_leaf:1-bootstrap:True,0.972342004852,0.986114014346,0.974381670424,0.879214509193
-DecisionTree,criterion:mse-splitter:best,0.967847858699,0.983892997944,0.9702679669,0.87286094169
-KNeighborsRegressor,n_neighbors:1-algorithm:auto-metric:minkowski-weights:uniform,0.880651725729,0.939920294183,0.94067458881,0.842507594646
-GradientBoostingClassifier,criterion:friedman_mse-n_estimators:10-loss:ls-min_samples_split:2-min_samples_leaf:1,0.669630875731,0.902444175243,0.905496473552,0.773958492903
-AdaBoostRegressor,loss:linear-n_estimators:10,0.773052658728,0.88355851819,0.908423430777,0.764137691604
-NuSVM,kernel:rbf-nu:0.010000-degree:3-gamma:0.010000,-0.00195238054202,0.315376586489,0.300223419798,0.211615476517
-SVM,kernel:rbf-degree:3-gamma:0.010000,0.0231487002301,0.266992960912,0.268015519126,0.189882369955
