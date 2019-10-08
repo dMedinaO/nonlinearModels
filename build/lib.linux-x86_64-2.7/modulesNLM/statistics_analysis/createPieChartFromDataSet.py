@@ -1,10 +1,4 @@
 ########################################################################
-# createPieChartFromDataSet.py,
-#
-# Pie chart maker.
-# Receives a dataset,a column key of it, and the filename for the output
-#
-#
 # Copyright (C) 2019  David Medina Ortiz, david.medina@cebib.cl
 #
 # This program is free software; you can redistribute it and/or modify

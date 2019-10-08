@@ -1,18 +1,4 @@
 ########################################################################
-# callService.py,
-#
-# Execute the clustering service using job process, for wich a service call in background need to be done.
-# All clustering process will be addressed with their own parameter and answers.
-#
-# Receives a normalized dataset, job id and user id. The data will be used to save information in user's personal path.
-#
-# Returns information as an csv file, calinski medition and sihouette through two histogram. Finally a json file with the process resume.
-#
-# NOTE: in the clustering service all methods are tested without the user confirmation. Thus this service implementation is easier than the supervised learning service
-#
-# python modules in the directory of the same, in order to be able to be
-# recognized from any python call and be indexed within the library itself.
-#
 # Copyright (C) 2019  David Medina Ortiz, david.medina@cebib.cl
 #
 # This program is free software; you can redistribute it and/or modify
@@ -237,21 +223,22 @@ class serviceClustering(object):
                     if responseUG1 ==0 and responseUG2 ==0:
                         dataG1.to_csv(self.pathResponse+"group1.csv", index=False)
                         dataG2.to_csv(self.pathResponse+"group2.csv", index=False)
-
-                        return 1#podemos seguir dividiendo
+                        return [1,dataG1,dataG2] #podemos seguir dividiendo, retorno los grupos
+                        #return 1#podemos seguir dividiendo
                     else:
                         print "Error 0"
-                        return -1#se genero un desbalance de clases
+                        return [-1,-1,-1]#se genero un desbalance de clases
                 else:
                     dataG1.to_csv(self.pathResponse+"group1.csv", index=False)
                     dataG2.to_csv(self.pathResponse+"group2.csv", index=False)
-                    return 1#podemos seguir dividiendo
+                    return [1,dataG1,dataG2] #podemos seguir dividiendo, retorno los grupos
+                    #return 1#podemos seguir dividiendo
             else:
                 print "Error I"
-                return -1#no se puede seguir dividiendo
+                return [-1,-1,-1]#no se puede seguir dividiendo
         else:
             print "Error II"
-            return -1#no se puede seguir dividiendo
+            return [-1,-1,-1] #no se puede seguir dividiendo
     #funcion que permite poder contar los elementos de la clase o categoria indicada
     def checkMembersDistributionCluster(self, labels):
 

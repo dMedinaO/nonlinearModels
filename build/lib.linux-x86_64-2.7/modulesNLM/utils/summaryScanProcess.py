@@ -1,8 +1,4 @@
 ########################################################################
-# summaryScanProcess.py,
-#
-# Create a summary of scan process 
-#
 # Copyright (C) 2019  David Medina Ortiz, david.medina@cebib.cl
 #
 # This program is free software; you can redistribute it and/or modify

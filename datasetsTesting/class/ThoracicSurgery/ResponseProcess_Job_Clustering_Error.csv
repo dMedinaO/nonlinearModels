@@ -1,0 +1,27 @@
+,Message Error
+1,Error exec K-Means with K 2
+2,Error exec Birch with K 2
+3,Error exec AgglomerativeClustering with params affinity = euclidean linkage = ward k = 2
+4,Error exec AgglomerativeClustering with params affinity = euclidean linkage = complete k = 2
+5,Error exec AgglomerativeClustering with params affinity = euclidean linkage = average k = 2
+6,Error exec AgglomerativeClustering with params affinity = euclidean linkage = single k = 2
+7,Error exec AgglomerativeClustering with params affinity = l1 linkage = ward k = 2
+8,Error exec AgglomerativeClustering with params affinity = l1 linkage = complete k = 2
+9,Error exec AgglomerativeClustering with params affinity = l1 linkage = average k = 2
+10,Error exec AgglomerativeClustering with params affinity = l1 linkage = single k = 2
+11,Error exec AgglomerativeClustering with params affinity = l2 linkage = ward k = 2
+12,Error exec AgglomerativeClustering with params affinity = l2 linkage = complete k = 2
+13,Error exec AgglomerativeClustering with params affinity = l2 linkage = average k = 2
+14,Error exec AgglomerativeClustering with params affinity = l2 linkage = single k = 2
+15,Error exec AgglomerativeClustering with params affinity = manhattan linkage = ward k = 2
+16,Error exec AgglomerativeClustering with params affinity = manhattan linkage = complete k = 2
+17,Error exec AgglomerativeClustering with params affinity = manhattan linkage = average k = 2
+18,Error exec AgglomerativeClustering with params affinity = manhattan linkage = single k = 2
+19,Error exec AgglomerativeClustering with params affinity = cosine linkage = ward k = 2
+20,Error exec AgglomerativeClustering with params affinity = cosine linkage = complete k = 2
+21,Error exec AgglomerativeClustering with params affinity = cosine linkage = average k = 2
+22,Error exec AgglomerativeClustering with params affinity = cosine linkage = single k = 2
+23,Error exec AgglomerativeClustering with params affinity = precomputed linkage = ward k = 2
+24,Error exec AgglomerativeClustering with params affinity = precomputed linkage = complete k = 2
+25,Error exec AgglomerativeClustering with params affinity = precomputed linkage = average k = 2
+26,Error exec AgglomerativeClustering with params affinity = precomputed linkage = single k = 2

@@ -1,11 +1,4 @@
 ########################################################################
-# launcherStatisticalData.py,
-#
-# Execute statistical analysis.
-# Receives a dataset,a column key of it, and the filename for the output
-# Generates outputs files and change process state
-#
-#
 # Copyright (C) 2019  David Medina Ortiz, david.medina@cebib.cl
 #
 # This program is free software; you can redistribute it and/or modify

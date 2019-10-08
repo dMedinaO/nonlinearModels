@@ -1,19 +1,4 @@
 ########################################################################
-# execModelPrediction.py,
-#
-# Allows to train a prediction algorithms according to given features Algorithms
-#
-# 1. AdaBoost
-# 2. Bagging
-# 3. DecisionTree
-# 4. Gradient
-# 5. KNN
-# 6. MLP
-# 7. NuSVR
-# 8. RandomForest
-# 9. SVR
-#
-#
 # Copyright (C) 2019  David Medina Ortiz, david.medina@cebib.cl
 #
 # This program is free software; you can redistribute it and/or modify

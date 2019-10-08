@@ -1,26 +1,4 @@
 ########################################################################
-# execAlgorithm.py,
-#
-# Executes supervised learning algorithm to create model training.
-# REceiver unique model's parameters and executes the complements for the outputs generated.
-#
-# Algorithms:
-#
-# 1 Adaboost
-# 2 Bagging
-# 3 Bernoulli
-# 4 Decision Tree
-# 5 Gaussian
-# 6 Gradient
-# 7 KNN
-# 8 MLP
-# 9 NuSVC
-# 10 RF
-# 11 SVC
-#
-# Each one has differents parametesr for their implementations.
-#
-#
 # Copyright (C) 2019  David Medina Ortiz, david.medina@cebib.cl
 #
 # This program is free software; you can redistribute it and/or modify

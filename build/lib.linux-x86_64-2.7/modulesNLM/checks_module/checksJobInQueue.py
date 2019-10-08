@@ -1,10 +1,4 @@
 ########################################################################
-# checksJobsInQueue.py,
-#
-# Checks jobs in queue.
-# If the jobs exists then they are executed. Job status is changed to "Processing".
-# An email is sent with the change in the job status.
-#
 # Copyright (C) 2019  David Medina Ortiz, david.medina@cebib.cl
 #
 # This program is free software; you can redistribute it and/or modify

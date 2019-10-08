@@ -1,8 +1,4 @@
 ########################################################################
-# transformFrequence.py,
-#
-# Transform data discrete to continues in frequence space.
-#
 # Copyright (C) 2019  David Medina Ortiz, david.medina@cebib.cl
 #
 # This program is free software; you can redistribute it and/or modify

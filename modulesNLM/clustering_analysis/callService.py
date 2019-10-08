@@ -223,21 +223,22 @@ class serviceClustering(object):
                     if responseUG1 ==0 and responseUG2 ==0:
                         dataG1.to_csv(self.pathResponse+"group1.csv", index=False)
                         dataG2.to_csv(self.pathResponse+"group2.csv", index=False)
-
-                        return 1#podemos seguir dividiendo
+                        return [1,dataG1,dataG2] #podemos seguir dividiendo, retorno los grupos
+                        #return 1#podemos seguir dividiendo
                     else:
                         print "Error 0"
-                        return -1#se genero un desbalance de clases
+                        return [-1,-1,-1]#se genero un desbalance de clases
                 else:
                     dataG1.to_csv(self.pathResponse+"group1.csv", index=False)
                     dataG2.to_csv(self.pathResponse+"group2.csv", index=False)
-                    return 1#podemos seguir dividiendo
+                    return [1,dataG1,dataG2] #podemos seguir dividiendo, retorno los grupos
+                    #return 1#podemos seguir dividiendo
             else:
                 print "Error I"
-                return -1#no se puede seguir dividiendo
+                return [-1,-1,-1]#no se puede seguir dividiendo
         else:
             print "Error II"
-            return -1#no se puede seguir dividiendo
+            return [-1,-1,-1] #no se puede seguir dividiendo
     #funcion que permite poder contar los elementos de la clase o categoria indicada
     def checkMembersDistributionCluster(self, labels):
 
