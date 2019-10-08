@@ -1,21 +1,4 @@
 ########################################################################
-# execAlgorithm.py,
-#
-# Execute clustering algorithms.
-# Receives a csv file and necessary parameters to works.
-# Generate files with neccesary results to generate graphics, also generates a csv file with algorithm's labels.
-#
-# NOTE: the results file is in a json file format.
-#
-# "Param" is a list with algorithms own parameters as:
-#
-# Algorithm   param value
-# K_means     k
-# Birch       k
-# Aglomerativo [linkage, affinity, numberK]
-# Otros       Void
-#
-#
 # Copyright (C) 2019  David Medina Ortiz, david.medina@cebib.cl
 #
 # This program is free software; you can redistribute it and/or modify

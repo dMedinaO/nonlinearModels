@@ -1,10 +1,4 @@
 ########################################################################
-# processStatisticsSummary.py,
-#
-# Receives continuous type data, then do statisticals calculations
-# Information summary
-#
-#
 # Copyright (C) 2019  David Medina Ortiz, david.medina@cebib.cl
 #
 # This program is free software; you can redistribute it and/or modify

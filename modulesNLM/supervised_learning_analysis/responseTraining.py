@@ -1,8 +1,4 @@
 ########################################################################
-# responseTraining.py,
-#
-# Allows to representate an output of a training algorithms regarding its paramethers
-#
 # Copyright (C) 2019  David Medina Ortiz, david.medina@cebib.cl
 #
 # This program is free software; you can redistribute it and/or modify

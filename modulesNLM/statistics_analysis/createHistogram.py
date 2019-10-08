@@ -1,10 +1,4 @@
 ########################################################################
-# createHistogram.py,
-#
-# Make a histogram of a dataset.
-# Receives a dataset,a column key of it, and the filename ofr the output
-#
-#
 # Copyright (C) 2019  David Medina Ortiz, david.medina@cebib.cl
 #
 # This program is free software; you can redistribute it and/or modify

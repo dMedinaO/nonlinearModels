@@ -1,10 +1,4 @@
 ########################################################################
-#
-# Script that allows to execute all the algorithms with different variations
-# to generate classifiers and their respective models, stores in a csv
-# file the data that is generated with regarding the various measures that
-# are obtained as a result of the process
-#
 # Copyright (C) 2019  David Medina Ortiz, david.medina@cebib.cl
 #
 # This program is free software; you can redistribute it and/or modify

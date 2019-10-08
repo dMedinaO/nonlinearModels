@@ -1,10 +1,4 @@
 ########################################################################
-# NuSVR.py,
-#
-# Script that allows to generate the installation of the project and the
-# python modules in the directory of the same, in order to be able to be
-# recognized from any python call and be indexed within the library itself.
-#
 # Copyright (C) 2019  David Medina Ortiz, david.medina@cebib.cl
 #
 # This program is free software; you can redistribute it and/or modify

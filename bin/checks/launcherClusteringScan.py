@@ -1,17 +1,4 @@
 ########################################################################
-# launcherClusteringScan.py,
-#
-# Script that allows to run the clustering service,
-# input:
-#     dataSet
-#     Option normalize
-#     pathResponse
-# response:
-#     csv error process
-#     csv result process
-#     histogram calinski
-#     histogram silhouettes
-#
 # Copyright (C) 2019  David Medina Ortiz, david.medina@cebib.cl
 #
 # This program is free software; you can redistribute it and/or modify

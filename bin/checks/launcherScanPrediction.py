@@ -1,10 +1,4 @@
 ########################################################################
-# launcherScanPrediction.py,
-#
-# script that allows to execute all the algorithms with different variations to generate
-# classifiers and their respective models, stores in a csv file the data that is generated with
-# regarding the various measures that are obtained as a result of the process ...
-#
 # Copyright (C) 2019  David Medina Ortiz, david.medina@cebib.cl
 #
 # This program is free software; you can redistribute it and/or modify
@@ -21,12 +15,6 @@
 # along with this program; if not, write to the Free Software Foundation,
 # Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 ########################################################################
-
-'''
-script que permite ejecutar todos los algoritmos con distintas variaciones para generar
-clasificadores y sus respectivos modelos, almacena en un archivo csv la data que se genera con
-respecto a las diversas medidas que se obtienen como resultado del proceso...
-'''
 
 import sys
 import pandas as pd

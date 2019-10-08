@@ -1,8 +1,4 @@
 ########################################################################
-# createConfusionMatrix.py,
-#
-# Create a confusion matrix for a given model
-#
 # Copyright (C) 2019  David Medina Ortiz, david.medina@cebib.cl
 #
 # This program is free software; you can redistribute it and/or modify
