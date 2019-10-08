@@ -1,6 +1,6 @@
-# Install modules of DMAKit
+# Install modules of RV-Clustering
 
-For install modules of DMAKit please check de Requeriments.
+For install modules of RV-Clustering please check de Requeriments.
 
 ## Requeriments
 
@@ -16,7 +16,7 @@ For install modules of DMAKit please check de Requeriments.
 
 ## Install Project
 
-For acces you need clone or downlad the repository, please acces to [DMAKit](https://github.com/dMedinaO/DMAKit)
+For acces you need clone or downlad the repository, please acces to [RV-Clustering](https://github.com/dMedinaO/nonlinearModels/blob/master/INSTALL.md)
 
 Acces to directory of project and as root mode in a terminal exec command:
 
@@ -29,11 +29,9 @@ The modules will be installed in Python directory and will be feasible import it
 
 - For acces to exec scripts, please visit [bin directory](./bin)
 
-- For see data set examples, you can acces to [testing directory](./testing)
+- For see data set examples, you can acces to [testing directory](./datasetsTesting)
 
 - For more details, please see [README](./README.md)
-
-- For see about projects, members and details of library and web service view please visit: [DMAKit_Web](http://pesb2.cl/dmakit/home/)
 
 ## NOTES
 

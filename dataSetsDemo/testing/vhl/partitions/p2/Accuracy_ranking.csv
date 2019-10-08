@@ -1,9 +1,0 @@
-Algorithm,Params,Validation,Accuracy,Recall,Precision,F1
-SVM,kernel:rbf-c:0.010000-degree:3,CV-5,0.65119047619,0.0,0.0,0.0
-NuSVM,kernel:rbf-nu:0.010000-degree:3,CV-5,0.60119047619,0.266666666667,0.166666666667,0.203174603175
-BernoulliNB,Default,CV-5,0.542857142857,0.266666666667,0.233333333333,0.235555555556
-Bagging,bootstrap:True-n_estimators:10,CV-5,0.514285714286,0.2,0.2,0.166666666667
-DecisionTree,criterion:gini-splitter:best,CV-5,0.494047619048,0.3,0.23,0.2
-KNeighborsClassifier,n_neighbors:1-algorithm:auto-metric:minkowski-weights:uniform,CV-5,0.489285714286,0.266666666667,0.152380952381,0.186666666667
-GaussianNB,Default,CV-5,0.460714285714,0.8,0.316666666667,0.451515151515
-AdaBoostClassifier,Algorithm:SAMME-n_estimators:10,CV-5,0.432142857143,0.2,0.18,0.18

@@ -1,9 +1,0 @@
-,Message Error
-1,Error exec AgglomerativeClustering with params affinity = l1 linkage = ward k = 2
-2,Error exec AgglomerativeClustering with params affinity = l2 linkage = ward k = 2
-3,Error exec AgglomerativeClustering with params affinity = manhattan linkage = ward k = 2
-4,Error exec AgglomerativeClustering with params affinity = cosine linkage = ward k = 2
-5,Error exec AgglomerativeClustering with params affinity = precomputed linkage = ward k = 2
-6,Error exec AgglomerativeClustering with params affinity = precomputed linkage = complete k = 2
-7,Error exec AgglomerativeClustering with params affinity = precomputed linkage = average k = 2
-8,Error exec AgglomerativeClustering with params affinity = precomputed linkage = single k = 2

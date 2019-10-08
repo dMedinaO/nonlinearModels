@@ -11,6 +11,36 @@ functionalities of the library were tested through the analysis of different dat
 ## RV-Clustering modules
 
 
+## 1. Checks Module
+
+Module with all the characteristics associated with the revision of the data sets, linearity evaluation, among the main characteristics.
+
+## 2. Graphic
+
+Module that allow create a chart of results, apply differente visualizations for check data in distribution of performance and other elements.
+
+## 3. Statistics analysis
+
+Module with all the characteristics associated with statistics analysis in dataset.
+
+## 4. Statistics corroboration
+
+Module with all the characteristics associated with the revision of the data sets and statistics corroboration from split partitions and other characteristics.
+
+## 5. Supervised learning classification
+
+Module that allows to apply different supervised learning algorithms associated with classification tasks.
+
+## 6. Supervised learning regression
+
+Module that allows to apply different supervised learning algorithms associated with regression/prediction tasks.
+
+## 7. Utils
+
+Module with all characteristics  and functionalities associated to different requeriments for to work with dataset.
+
+## Exec scripts
+
 
 ## NOTES
 
