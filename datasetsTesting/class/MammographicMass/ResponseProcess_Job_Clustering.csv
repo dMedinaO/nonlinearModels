@@ -1,0 +1,19 @@
+,algorithm,params,groups,memberG1,memberG2,calinski_harabaz_score,silhouette_score
+1,K-Means,K = 2,2,477,1,107.89463083,0.878285019102
+2,Birch,K = 2,2,477,1,107.89463083,0.878285019102
+3,AgglomerativeClustering,affinity = euclidean linkage = ward k = 2,2,477,1,107.89463083,0.878285019102
+4,AgglomerativeClustering,affinity = euclidean linkage = complete k = 2,2,477,1,107.89463083,0.878285019102
+5,AgglomerativeClustering,affinity = euclidean linkage = average k = 2,2,477,1,107.89463083,0.878285019102
+6,AgglomerativeClustering,affinity = euclidean linkage = single k = 2,2,477,1,107.89463083,0.878285019102
+7,AgglomerativeClustering,affinity = l1 linkage = complete k = 2,2,477,1,107.89463083,0.878285019102
+8,AgglomerativeClustering,affinity = l1 linkage = average k = 2,2,477,1,107.89463083,0.878285019102
+9,AgglomerativeClustering,affinity = l1 linkage = single k = 2,2,477,1,107.89463083,0.878285019102
+10,AgglomerativeClustering,affinity = l2 linkage = complete k = 2,2,477,1,107.89463083,0.878285019102
+11,AgglomerativeClustering,affinity = l2 linkage = average k = 2,2,477,1,107.89463083,0.878285019102
+12,AgglomerativeClustering,affinity = l2 linkage = single k = 2,2,477,1,107.89463083,0.878285019102
+13,AgglomerativeClustering,affinity = manhattan linkage = complete k = 2,2,477,1,107.89463083,0.878285019102
+14,AgglomerativeClustering,affinity = manhattan linkage = average k = 2,2,477,1,107.89463083,0.878285019102
+15,AgglomerativeClustering,affinity = manhattan linkage = single k = 2,2,477,1,107.89463083,0.878285019102
+16,AgglomerativeClustering,affinity = cosine linkage = complete k = 2,2,277,201,71.0114261713,0.201345156205
+17,AgglomerativeClustering,affinity = cosine linkage = average k = 2,2,173,305,75.4738778917,0.24702420213
+18,AgglomerativeClustering,affinity = cosine linkage = single k = 2,2,477,1,107.89463083,0.878285019102

@@ -1,4 +1,17 @@
 ########################################################################
+# launcherClusteringScan.py,
+#
+# Script that allows to run the clustering service,
+# input:
+#     dataSet
+#     Option normalize
+#     pathResponse
+# response:
+#     csv error process
+#     csv result process
+#     histogram calinski
+#     histogram silhouettes
+#
 # Copyright (C) 2019  David Medina Ortiz, david.medina@cebib.cl
 #
 # This program is free software; you can redistribute it and/or modify
@@ -15,6 +28,7 @@
 # along with this program; if not, write to the Free Software Foundation,
 # Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 ########################################################################
+# python launcherClusteringScan.py -d ../dataSetsDemo/vhl/dataCSV.csv -o 1 -p ../dataSetsDemo/vhl/result/ -r Clinical -k 1 -t 10
 
 from modulesNLM.clustering_analysis import callService
 from modulesNLM.utils import responseResults
@@ -29,7 +43,7 @@ import time
 
 class Nodo(object):
     def __init__(self, data):
-        # Data contiene el dataFrame de cada nodo
+        # Data contiene el dataFrame de cada nodo 
         self.data = data
         # Marca unica para realizar enlace y edges con graphviz
         self.id = int(round(time.time() * 1000))
@@ -37,7 +51,7 @@ class Nodo(object):
         self.left = None
         # rama der
         self.right = None
-
+        
 class BinaryTree(object):
     def __init__(self):
         self.top = None
@@ -51,11 +65,12 @@ class BinaryTree(object):
         if isinstance(result,list):
             if(result[0] == -1):
                 #print "No puedo dividir: ",dataSet.shape[0]
+                dataSet.to_csv(pathResponse+""+str(dataSet.shape[0])+'_'+str(int(round(time.time() * 1000)))+'.csv')
                 return nodo
             else:
-                #print "Dividir -> ",dataSet.shape[0]
-                #print "G1: ",result[1].shape[0]
-                #print "G2: ",result[2].shape[0]
+                print "Dividir -> ",dataSet.shape[0]
+                print "G1: ",result[1].shape[0]
+                print "G2: ",result[2].shape[0]
                 #Los sleep es para generar id unicos por cada dataframe que se agregaal arbol
                 nodo.left = Nodo(result[1])
                 time.sleep(0.05)
@@ -69,9 +84,9 @@ class BinaryTree(object):
             #almacena nodo anterior que se pudo dividir
             dataSet.to_csv(pathResponse+""+str(dataSet.shape[0])+'_'+str(int(round(time.time() * 1000)))+'.csv')
             return nodo
-
-    # Llamar funcion recursiva para dibujar arbol
-    def diagramSplit(self, pathResult) :
+            
+    # Llamar funcion recursiva para dibujar arbol  
+    def diagramSplit(self, pathResult) : 
         print "Imprimir"
         tree = gp.Graph(format='png')
         if(self.top != None):
@@ -88,13 +103,13 @@ class BinaryTree(object):
         tree.node(str(data.id),str(data.data.shape[0]))
         if(data.right != None):
             tree.edge(str(data.id),str(data.right.id));
-            self.draw(data.right,tree)
-
+            self.draw(data.right,tree) 
+    
     # Insercion para el nodo raiz
     def insert(self, data):
         self.top = Nodo(data)
-
-
+            
+    
 parser = argparse.ArgumentParser()
 parser.add_argument("-d", "--dataSet", help="full path and name to acces dataSet input process", required=True)
 parser.add_argument("-o", "--option", type=int, help="Option to Normalize data set: 1. Normal Scale\n2. Min Max Scaler\n3. Log scale\n4. Log normal scale", required=True)
@@ -119,7 +134,7 @@ if (processData.validatePath(args.pathResult) == 0):
         optionNormalize = int(args.option)
         featureClass = args.response
         kindDataSet = int(args.kind)
-        threshold = int(args.threshold)
+        threshold = float(args.threshold)
         #initialSize = int(args.initialSize)
         #Obtiene la cantida de row del dataSet
         initialSize = dataSet.shape[0];
@@ -127,4 +142,5 @@ if (processData.validatePath(args.pathResult) == 0):
         #Nodo raiz con la informacion del dataSet inicial
         tree.insert(dataSet)
         tree.split(tree.top,dataSet, pathResponse, optionNormalize, featureClass, kindDataSet, threshold, initialSize)
-        #tree.diagramSplit(pathResponse)
+        tree.diagramSplit(pathResponse)
+
