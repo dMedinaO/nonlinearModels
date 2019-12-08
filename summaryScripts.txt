@@ -1,0 +1,71 @@
+WorkFlow: RV-Clustering
+
+Etapa 1: Evaluacion de linealidad del conjunto de datos
+
+LauncherCheckNonLinear.py: evalua si el conjunto de datos presenta una respuesta del tipo lineal o no, aplicando una variación del algoritmo Ho-Kashiap empleando
+los algoritmos basados en metodos lineales para obtener una performance predictiva
+
+usage: LauncherCheckNonLinear.py [-h] --dataset DATASET --type {1,2}
+                                 [--threshold THRESHOLD] --feature FEATURE
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --dataset DATASET, -d DATASET
+                        dataSet input to check data
+  --type {1,2}, -k {1,2}
+                        Kind of dataSet: 1 for classification models --- 2 for
+                        predictive models
+  --threshold THRESHOLD, -t THRESHOLD
+                        threshold to consider in linear evaluation of response
+                        in dataset
+  --feature FEATURE, -f FEATURE
+                        Name of feature with response in dataset
+
+El threshold sirve para evaluar la linealidad del metodo, por default se utiliza 0.7 en la performance de Precission (modelos de clasificacion) o R score (modelos de regresion) de los modelos. Se recomiendan valores desde dicho umbral, ya que, a mayor precision, mejor es la calidad del modelo. 
+
+Retorna 0 si el conjunto de datos presenta respuesta no lineal
+        1 en caso de que fuera lineal
+
+Etapa 2: Exploracion de algoritmos y parametros
+
+LauncherexploreRegressionModels.py | LauncherExploratoryClassifierModels.py: explora diferentes algoritmos y parametros para entrenar modelos sobre un mismo conjunto de datos, obtiene diferentes medidas de desempeno y compara las medidas con el umbral minimo en la medida de desempeno de precision (caso modelos de clasificacion) o R-score (caso modelos de regresion)
+
+usage: LauncherExploratoryClassifierModels.py [-h] -d DATASET -p PATHRESULT -m
+                                              PERFORMANCE -r RESPONSE -t
+                                              THRESHOLD -k KVALUEDATA
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d DATASET, --dataSet DATASET
+                        full path and name to acces dataSet input process
+  -p PATHRESULT, --pathResult PATHRESULT
+                        full path for save results
+  -m PERFORMANCE, --performance PERFORMANCE
+                        performance selected model
+  -r RESPONSE, --response RESPONSE
+                        name of column with response values in dataset
+  -t THRESHOLD, --threshold THRESHOLD
+                        threshold of minimus values expected form model
+                        generated
+  -k KVALUEDATA, --kValueData KVALUEDATA
+                        Value for cross validation, this value most be higher
+                        or equal 2
+
+usage: LauncherexploreRegressionModels.py [-h] -d DATASET -p PATHRESULT -m
+                                          PERFORMANCE -r RESPONSE -t THRESHOLD
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d DATASET, --dataSet DATASET
+                        full path and name to acces dataSet input process
+  -p PATHRESULT, --pathResult PATHRESULT
+                        full path for save results
+  -m PERFORMANCE, --performance PERFORMANCE
+                        performance selected model
+  -r RESPONSE, --response RESPONSE
+                        name of column with response values in dataset
+  -t THRESHOLD, --threshold THRESHOLD
+                        threshold of minimus values expected form model
+                        generated
+
+

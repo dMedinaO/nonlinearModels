@@ -38,6 +38,7 @@ class summaryProcessClusteringScan(object):
             print "Create histogram for ", key
             namePicture = self.pathResponse+key+".svg"
             title = "Histogram for "+key
+            print self.dataFrame            
             graphic.generateHistogram(self.dataFrame, key, namePicture, title)
 
     #metodo que permite crear el resumen estadistico

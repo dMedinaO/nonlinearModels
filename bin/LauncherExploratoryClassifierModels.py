@@ -141,17 +141,19 @@ if (processData.validatePath(args.pathResult) == 0):
         #AdaBoost
         for algorithm in ['SAMME', 'SAMME.R']:
             for n_estimators in [10,50,100,200,500,1000,1500,2000]:
-                #try:
-                print "Excec AdaBoost with %s - %d" % (algorithm, n_estimators)
-                AdaBoostObject = AdaBoost.AdaBoost(data, target, n_estimators, algorithm, kValueData)
-                AdaBoostObject.trainingMethod(kindDataSet)
-                params = "Algorithm:%s-n_estimators:%d" % (algorithm, n_estimators)
-                row = ["AdaBoostClassifier", params, validation, AdaBoostObject.performanceData.scoreData[3], AdaBoostObject.performanceData.scoreData[4], AdaBoostObject.performanceData.scoreData[5], AdaBoostObject.performanceData.scoreData[6]]
-                matrixResponse.append(row)
-                iteracionesCorrectas+=1
-                #except:
-                #    iteracionesIncorrectas+=1
-                #    pass
+                try:
+                    print "Excec AdaBoost with %s - %d" % (algorithm, n_estimators)
+                    AdaBoostObject = AdaBoost.AdaBoost(data, target, n_estimators, algorithm, kValueData)
+                    AdaBoostObject.trainingMethod(kindDataSet)
+                    params = "Algorithm:%s-n_estimators:%d" % (algorithm, n_estimators)
+                    row = ["AdaBoostClassifier", params, validation, AdaBoostObject.performanceData.scoreData[3], AdaBoostObject.performanceData.scoreData[4], AdaBoostObject.performanceData.scoreData[5], AdaBoostObject.performanceData.scoreData[6]]
+                    matrixResponse.append(row)
+                    iteracionesCorrectas+=1
+                    print row
+                    break
+                except:
+                    iteracionesIncorrectas+=1
+                    pass
 
         #Baggin
         for bootstrap in [True, False]:
@@ -165,6 +167,7 @@ if (processData.validatePath(args.pathResult) == 0):
                     matrixResponse.append(row)
                     iteracionesCorrectas+=1
                     print row
+                    break
                 except:
                     iteracionesIncorrectas+=1
                     pass
@@ -179,6 +182,7 @@ if (processData.validatePath(args.pathResult) == 0):
             matrixResponse.append(row)
             iteracionesCorrectas+=1
             print row
+
         except:
             iteracionesIncorrectas+=1
             pass
@@ -195,6 +199,7 @@ if (processData.validatePath(args.pathResult) == 0):
                     matrixResponse.append(row)
                     iteracionesCorrectas+=1
                     print row
+                    break
                 except:
                     iteracionesIncorrectas+=1
                     pass
@@ -208,7 +213,10 @@ if (processData.validatePath(args.pathResult) == 0):
 
             row = ["GaussianNB", params, validation, gaussianObject.performanceData.scoreData[3], gaussianObject.performanceData.scoreData[4], gaussianObject.performanceData.scoreData[5], gaussianObject.performanceData.scoreData[6]]
             matrixResponse.append(row)
+            print row
+            iteracionesCorrectas+=1
         except:
+            iteracionesIncorrectas+=1
             pass
 
         #gradiente
@@ -223,6 +231,7 @@ if (processData.validatePath(args.pathResult) == 0):
                     matrixResponse.append(row)
                     iteracionesCorrectas+=1
                     print row
+                    break
                 except:
                     iteracionesIncorrectas+=1
                     pass
@@ -242,43 +251,10 @@ if (processData.validatePath(args.pathResult) == 0):
                             matrixResponse.append(row)
                             iteracionesCorrectas+=1
                             print row
+                            break
                         except:
                             iteracionesIncorrectas+=1
                             pass
-
-        #NuSVC
-        for kernel in ['rbf', 'linear', 'poly', 'sigmoid', 'precomputed']:
-            for nu in [0.01, 0.05, 0.1, 0.5]:
-                for degree in range(3, 15):
-                    try:
-                        print "Excec NuSVM"
-                        nuSVM = NuSVM.NuSVM(data, target, kernel, nu, degree, 0.01, kValueData)
-                        nuSVM.trainingMethod(kindDataSet)
-                        params = "kernel:%s-nu:%f-degree:%d" % (kernel, nu, degree)
-                        row = ["NuSVM", params, validation, nuSVM.performanceData.scoreData[3], nuSVM.performanceData.scoreData[4], nuSVM.performanceData.scoreData[5], nuSVM.performanceData.scoreData[6]]
-                        matrixResponse.append(row)
-                        iteracionesCorrectas+=1
-                        print row
-                    except:
-                        iteracionesIncorrectas+=1
-                        pass
-
-        #SVC
-        for kernel in ['rbf', 'linear', 'poly', 'sigmoid', 'precomputed']:
-            for C_value in [0.01, 0.05, 0.1, 0.5]:
-                for degree in range(3, 15):
-                    try:
-                        print "Excec SVM"
-                        svm = SVM.SVM(data, target, kernel, C_value, degree, 0.01, kValueData)
-                        svm.trainingMethod(kindDataSet)
-                        params = "kernel:%s-c:%f-degree:%d" % (kernel, C_value, degree)
-                        row = ["SVM", params, validation, svm.performanceData.scoreData[3], svm.performanceData.scoreData[4], svm.performanceData.scoreData[5], svm.performanceData.scoreData[6]]
-                        matrixResponse.append(row)
-                        iteracionesCorrectas+=1
-                        print row
-                    except:
-                        iteracionesIncorrectas+=1
-                        pass
 
         #RF
         for n_estimators in [10,50,100,200,500,1000,1500,2000]:
@@ -294,6 +270,7 @@ if (processData.validatePath(args.pathResult) == 0):
                         matrixResponse.append(row)
                         iteracionesCorrectas+=1
                         print row
+                        break
                     except:
                         iteracionesIncorrectas+=1
                         pass
@@ -305,6 +282,11 @@ if (processData.validatePath(args.pathResult) == 0):
             #generamos el nombre del archivo
             nameFileExport = "%ssummaryProcessJob.csv" % (pathResponse)
             dataFrame.to_csv(nameFileExport, index=False)
+
+            #evaluamos si existen valores por sobre el umbral ingresado
+            for i in range(len(dataFrame[args.performance])):
+                if dataFrame[args.performance][i]> args.threshold:
+                    print "Algorithm: %s with params [%s] has value performance %f in performance %s and is higher than threshold %f" % (dataFrame['Algorithm'][i], dataFrame['Params'][i], dataFrame[args.performance][i], args.performance, args.threshold)
 
             #estimamos los estadisticos resumenes para cada columna en el header
             #instanciamos el object
@@ -324,7 +306,7 @@ if (processData.validatePath(args.pathResult) == 0):
 
             #generamos el proceso estadisitico
             summaryObject = summaryScanProcess.summaryProcessClusteringScan(nameFileExport, pathResponse, ['Accuracy', 'Recall', 'Precision', 'F1'])
-            summaryObject.createHistogram()
+            #summaryObject.createHistogram()
             summaryObject.createRankingFile()
 
             finishTime = time.time() - start_time
@@ -346,6 +328,8 @@ if (processData.validatePath(args.pathResult) == 0):
             nameFileExport = "%ssummaryProcess.json" % (pathResponse)
             with open(nameFileExport, 'w') as fp:
                 json.dump(dictionary, fp)
+
+
         except:
             print "Error during exec program"
     else:

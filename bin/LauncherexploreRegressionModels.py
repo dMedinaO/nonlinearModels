@@ -124,7 +124,7 @@ if (processData.validatePath(args.pathResult) == 0):
 
         #AdaBoost
         for loss in ['linear', 'squar', 'exponential']:
-            for n_estimators in [10,50,100,200,500,1000,1500,2000]:
+            for n_estimators in [10]:#,50,100,200,500,1000,1500,2000]:
                 try:
                     print "Excec AdaBoostRegressor with %s - %d" % (loss, n_estimators)
                     AdaBoostObject = AdaBoost.AdaBoost(dataSetTraining, classTraining, n_estimators, loss)
@@ -158,7 +158,7 @@ if (processData.validatePath(args.pathResult) == 0):
 
         #Baggin
         for bootstrap in [True, False]:
-            for n_estimators in [10,50,100,200,500,1000,1500,2000]:
+            for n_estimators in [10]:#,50,100,200,500,1000,1500,2000]:
                 try:
                     print "Excec Bagging with %s - %d" % (bootstrap, n_estimators)
                     bagginObject = Baggin.Baggin(dataSetTraining, classTraining, n_estimators, bootstrap)
@@ -224,7 +224,7 @@ if (processData.validatePath(args.pathResult) == 0):
         #gradiente
         for loss in ['ls', 'lad', 'huber', 'quantile']:
             for criterion in ['friedman_mse', 'mse', 'mae']:
-                for n_estimators in [10,50,100,200,500,1000,1500,2000]:
+                for n_estimators in [10]:#,50,100,200,500,1000,1500,2000]:
                     for min_samples_split in range (2, 11):
                         for min_samples_leaf in range(1, 11):
                             try:
@@ -252,6 +252,7 @@ if (processData.validatePath(args.pathResult) == 0):
                                 matrixResponse.append(row)
                                 iteracionesCorrectas+=1
                                 print row
+                                break
                             except:
                                 iteracionesIncorrectas+=1
                                 pass
@@ -286,81 +287,12 @@ if (processData.validatePath(args.pathResult) == 0):
                             matrixResponse.append(row)
                             iteracionesCorrectas+=1
                             print row
+                            break
                         except:
                             iteracionesIncorrectas+=1
                             pass
-
-
-        #NuSVR
-        for kernel in ['rbf', 'linear', 'poly', 'sigmoid', 'precomputed']:
-            for nu in [0.01, 0.05, 0.1, 0.5]:
-                for degree in range(3, 15):
-                    for gamma in [0.01, 0.1, 1, 10, 100]:
-                        try:
-                            print "Excec NuSVM"
-                            nuSVM = NuSVR.NuSVRModel(dataSetTraining, classTraining, kernel, degree, gamma, nu)
-                            nuSVM.trainingMethod()
-
-                            predictedValues = nuSVM.SVRAlgorithm.predict(dataSetTraining).tolist()
-                            rscore = nuSVM.SVRAlgorithm.score(dataSetTraining, classTraining)
-
-                            performanceValues = performanceData.performancePrediction(classTraining, predictedValues)
-                            pearsonValue = performanceValues.calculatedPearson()['pearsonr']
-                            spearmanValue = performanceValues.calculatedSpearman()['spearmanr']
-                            kendalltauValue = performanceValues.calculatekendalltau()['kendalltau']
-
-                            if pearsonValue == "ERROR":
-                                pearsonValue=0
-                            if spearmanValue == "ERROR":
-                                spearmanValue=0
-                            if kendalltauValue == "ERROR":
-                                kendalltauValue=0
-
-                            params = "kernel:%s-nu:%f-degree:%d-gamma:%f" % (kernel, nu, degree, gamma)
-                            row = ["NuSVM", params, rscore, pearsonValue, spearmanValue, kendalltauValue]
-                            matrixResponse.append(row)
-                            iteracionesCorrectas+=1
-                            print row
-                        except:
-                            iteracionesIncorrectas+=1
-                            pass
-
-
-        #SVC
-        for kernel in ['rbf', 'linear', 'poly', 'sigmoid', 'precomputed']:
-            for degree in range(3, 15):
-                for gamma in [0.01, 0.1, 1, 10, 100]:
-                    try:
-                        print "Excec SVM"
-                        svm = SVR.SVRModel(dataSetTraining, classTraining, kernel, degree, gamma)
-                        svm.trainingMethod()
-
-                        predictedValues = svm.SVRAlgorithm.predict(dataSetTraining).tolist()
-                        rscore = svm.SVRAlgorithm.score(dataSetTraining, classTraining)
-
-                        performanceValues = performanceData.performancePrediction(classTraining, predictedValues)
-                        pearsonValue = performanceValues.calculatedPearson()['pearsonr']
-                        spearmanValue = performanceValues.calculatedSpearman()['spearmanr']
-                        kendalltauValue = performanceValues.calculatekendalltau()['kendalltau']
-
-                        if pearsonValue == "ERROR":
-                            pearsonValue=0
-                        if spearmanValue == "ERROR":
-                            spearmanValue=0
-                        if kendalltauValue == "ERROR":
-                            kendalltauValue=0
-
-                        params = "kernel:%s-degree:%d-gamma:%f" % (kernel, degree, gamma)
-                        row = ["SVM", params, rscore, pearsonValue, spearmanValue, kendalltauValue]
-                        matrixResponse.append(row)
-                        iteracionesCorrectas+=1
-                        print row
-                    except:
-                        iteracionesIncorrectas+=1
-                        pass
-
-
-        for n_estimators in [10,50,100,200,500,1000,1500,2000]:
+        #RF
+        for n_estimators in [10]:#,50,100,200,500,1000,1500,2000]:
             for criterion in ['mse', 'mae']:
                 for min_samples_split in range (2, 11):
                     for min_samples_leaf in range(1, 11):
@@ -390,6 +322,7 @@ if (processData.validatePath(args.pathResult) == 0):
                                 matrixResponse.append(row)
                                 iteracionesCorrectas+=1
                                 print row
+                                break
                             except:
                                 iteracionesIncorrectas+=1
                                 pass
@@ -401,6 +334,11 @@ if (processData.validatePath(args.pathResult) == 0):
             #generamos el nombre del archivo
             nameFileExport = "%ssummaryProcessJob.csv" % (pathResponse)
             dataFrame.to_csv(nameFileExport, index=False)
+
+            #evaluamos si existen valores por sobre el umbral ingresado
+            for i in range(len(dataFrame[args.performance])):
+                if dataFrame[args.performance][i]> args.threshold:
+                    print "Algorithm: %s with params [%s] has value performance %f in performance %s and is higher than threshold %f" % (dataFrame['Algorithm'][i], dataFrame['Params'][i], dataFrame[args.performance][i], args.performance, args.threshold)
 
             #estimamos los estadisticos resumenes para cada columna en el header
             #instanciamos el object
@@ -419,7 +357,7 @@ if (processData.validatePath(args.pathResult) == 0):
             dataFrame.to_csv(nameFileExport2, index=False)
 
             summaryObject = summaryScanProcess.summaryProcessClusteringScan(nameFileExport, pathResponse, ['R_Score', 'Pearson', 'Spearman', 'Kendalltau'])
-            summaryObject.createHistogram()
+            #summaryObject.createHistogram()
             summaryObject.createRankingFile()
 
             finishTime = time.time() - start_time

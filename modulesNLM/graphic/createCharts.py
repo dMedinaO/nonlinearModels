@@ -165,7 +165,7 @@ class graphicsCreator(object):
             try:
                 dataValues.append(float(element))
             except:
-                pass
+                pass        
         sns_plot = sns.distplot(dataValues , color="olive", label=key, kde=False, rug=True)
         sns.plt.legend()
         sns.plt.title(title)
