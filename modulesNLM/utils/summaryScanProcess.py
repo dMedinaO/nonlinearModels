@@ -18,7 +18,7 @@
 
 import pandas as pd
 import numpy as np
-from DMA_Kit_Modules.graphic import createCharts
+from modulesNLM.graphic import createCharts
 
 class summaryProcessClusteringScan(object):
 

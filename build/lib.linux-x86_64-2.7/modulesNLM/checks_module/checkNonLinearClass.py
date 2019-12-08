@@ -36,7 +36,7 @@ class checkNonLinearClass(object):
 
     def __init__(self, dataSet, featureClass, threshold):
 
-        self.dataSet = dataSet
+        self.dataSet = pd.read_csv(dataSet)
         self.featureClass = featureClass
         self.threshold = threshold
 

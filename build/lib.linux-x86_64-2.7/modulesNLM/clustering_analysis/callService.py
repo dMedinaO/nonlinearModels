@@ -159,8 +159,8 @@ class serviceClustering(object):
         #exportamos el resultado en formato dataframe
         self.dataFrame = pd.DataFrame(responseProcess, columns=header, index=indexResponse)
         self.dataFrameLog = pd.DataFrame(logResponsesError, columns=["Message Error"], index = indexResponseError)
-        self.dataFrame.to_csv(self.pathResponse+"ResponseProcess_Job_Clustering.csv", index=indexResponse)
-        self.dataFrameLog.to_csv(self.pathResponse+"ResponseProcess_Job_Clustering_Error.csv", index=indexResponseError)
+        #self.dataFrame.to_csv(self.pathResponse+"ResponseProcess_Job_Clustering.csv", index=indexResponse)
+        #self.dataFrameLog.to_csv(self.pathResponse+"ResponseProcess_Job_Clustering_Error.csv", index=indexResponseError)
 
         #generamos el resumen del proceso
         summary = summaryScan.summaryProcessClusteringScan(self.dataFrame, self.pathResponse+"ResponseProcess_Job_Clustering.csv", self.pathResponse)
@@ -221,16 +221,16 @@ class serviceClustering(object):
                     responseUG2 = checkData.checkEvalClass(dataG2[self.featureClass], self.threshold)
 
                     if responseUG1 ==0 and responseUG2 ==0:
-                        dataG1.to_csv(self.pathResponse+"group1.csv", index=False)
-                        dataG2.to_csv(self.pathResponse+"group2.csv", index=False)
+                        #dataG1.to_csv(self.pathResponse+"group1.csv", index=False)
+                        #dataG2.to_csv(self.pathResponse+"group2.csv", index=False)
                         return [1,dataG1,dataG2] #podemos seguir dividiendo, retorno los grupos
                         #return 1#podemos seguir dividiendo
                     else:
                         print "Error 0"
                         return [-1,-1,-1]#se genero un desbalance de clases
                 else:
-                    dataG1.to_csv(self.pathResponse+"group1.csv", index=False)
-                    dataG2.to_csv(self.pathResponse+"group2.csv", index=False)
+                    #dataG1.to_csv(self.pathResponse+"group1.csv", index=False)
+                    #dataG2.to_csv(self.pathResponse+"group2.csv", index=False)
                     return [1,dataG1,dataG2] #podemos seguir dividiendo, retorno los grupos
                     #return 1#podemos seguir dividiendo
             else:

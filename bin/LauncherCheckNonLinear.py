@@ -19,13 +19,21 @@
 from modulesNLM.checks_module import checkNonLinearRegression, checkNonLinearClass
 import sys
 import pandas as pd
+import argparse
 
-#atributos
-dataSet = pd.read_csv(sys.argv[1])
+#process data with argparse for to get a control of input params from command line
+parser = argparse.ArgumentParser()
+parser.add_argument('--dataset', '-d', help='dataSet input to check data', required=True)
+parser.add_argument('--type', '-k', help='Kind of dataSet: 1 for classification models --- 2 for predictive models', type=int, choices=[1, 2], required=True)
+parser.add_argument('--threshold', '-t', help='threshold to consider in linear evaluation of response in dataset', type=float, default=0.7)
+parser.add_argument('--feature', '-f', help='Name of feature with response in dataset', required=True)
+args = parser.parse_args()
 
-tipo = int(sys.argv[2])
-featureResponse = sys.argv[3]
-threshold = float(sys.argv[4])
+#get inputs from command line
+dataSet = args.dataset
+tipo = args.type
+featureResponse = args.feature
+threshold = args.threshold
 
 response = -1
 
@@ -40,8 +48,8 @@ else:
     response = checkMethod.applyLinearRegression()#aplicamos la regresion lineal
 
 if response == 0:
-    print "Dataset is nonlinear"
+    print "Dataset is nonlinear!\nPlease to use LauncherExploreModels.py script for to see more options of algorithms and parameters"
 elif response == 1:
-    print "Dataset is linear "
+    print "Dataset is linear"
 else:
     print "Error during exec process, please contac us at developer of library"
