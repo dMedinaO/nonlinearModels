@@ -32,6 +32,9 @@
 
 from modulesNLM.clustering_analysis import callService
 from modulesNLM.utils import responseResults
+from modulesNLM.clustering_analysis import evaluationClustering
+from modulesNLM.utils import encodingFeatures
+
 #import matplotlib
 #matplotlib.use('Agg')
 import graphviz as gp
@@ -40,10 +43,11 @@ import sys
 import pandas as pd
 import argparse
 import time
+import glob
 
 class Nodo(object):
     def __init__(self, data):
-        # Data contiene el dataFrame de cada nodo 
+        # Data contiene el dataFrame de cada nodo
         self.data = data
         # Marca unica para realizar enlace y edges con graphviz
         self.id = int(round(time.time() * 1000))
@@ -51,7 +55,7 @@ class Nodo(object):
         self.left = None
         # rama der
         self.right = None
-        
+
 class BinaryTree(object):
     def __init__(self):
         self.top = None
@@ -65,7 +69,7 @@ class BinaryTree(object):
         if isinstance(result,list):
             if(result[0] == -1):
                 #print "No puedo dividir: ",dataSet.shape[0]
-                dataSet.to_csv(pathResponse+""+str(dataSet.shape[0])+'_'+str(int(round(time.time() * 1000)))+'.csv')
+                dataSet.to_csv(pathResponse+""+str(dataSet.shape[0])+'_'+str(int(round(time.time() * 1000)))+'.csv', index=False)
                 return nodo
             else:
                 print "Dividir -> ",dataSet.shape[0]
@@ -82,11 +86,11 @@ class BinaryTree(object):
                 return nodo
         else:
             #almacena nodo anterior que se pudo dividir
-            dataSet.to_csv(pathResponse+""+str(dataSet.shape[0])+'_'+str(int(round(time.time() * 1000)))+'.csv')
+            dataSet.to_csv(pathResponse+""+str(dataSet.shape[0])+'_'+str(int(round(time.time() * 1000)))+'.csv', index=False)
             return nodo
-            
-    # Llamar funcion recursiva para dibujar arbol  
-    def diagramSplit(self, pathResult) : 
+
+    # Llamar funcion recursiva para dibujar arbol
+    def diagramSplit(self, pathResult) :
         print "Imprimir"
         tree = gp.Graph(format='png')
         if(self.top != None):
@@ -103,19 +107,19 @@ class BinaryTree(object):
         tree.node(str(data.id),str(data.data.shape[0]))
         if(data.right != None):
             tree.edge(str(data.id),str(data.right.id));
-            self.draw(data.right,tree) 
-    
+            self.draw(data.right,tree)
+
     # Insercion para el nodo raiz
     def insert(self, data):
         self.top = Nodo(data)
-            
-    
+
+
 parser = argparse.ArgumentParser()
 parser.add_argument("-d", "--dataSet", help="full path and name to acces dataSet input process", required=True)
-parser.add_argument("-o", "--option", type=int, help="Option to Normalize data set: 1. Normal Scale\n2. Min Max Scaler\n3. Log scale\n4. Log normal scale", required=True)
+#parser.add_argument("-o", "--option", type=int, help="Option to Normalize data set: 1. Normal Scale\n2. Min Max Scaler\n3. Log scale\n4. Log normal scale", default=2)
 parser.add_argument("-p", "--pathResult", help="full path for save results", required=True)
 parser.add_argument("-r", "--response", help="Name response in dataset", required=True)
-parser.add_argument("-k", "--kind", type=int, help="Kind of dataset: 1. Classification 2. Regression", required=True)
+parser.add_argument("-k", "--kind", type=int, help="Kind of dataset: 1. Classification 2. Regression", required=True, choices=[1,2])
 parser.add_argument("-t", "--threshold", type=float, help="threshold for umbalanced class", required=True)
 parser.add_argument("-s", "--initialSize", type=int, help="initial Size of dataset", required=True)
 
@@ -131,7 +135,7 @@ if (processData.validatePath(args.pathResult) == 0):
         #recibimos los datos de entrada...
         dataSet = pd.read_csv(args.dataSet)
         pathResponse = args.pathResult
-        optionNormalize = int(args.option)
+        optionNormalize = 2
         featureClass = args.response
         kindDataSet = int(args.kind)
         threshold = float(args.threshold)
@@ -144,3 +148,37 @@ if (processData.validatePath(args.pathResult) == 0):
         tree.split(tree.top,dataSet, pathResponse, optionNormalize, featureClass, kindDataSet, threshold, initialSize)
         tree.diagramSplit(pathResponse)
 
+        #una vez procesada la data... para cada elemento en formato csv en el path response... lo leemos
+        listFiles = glob.glob(pathResponse+"*.csv")
+
+        matrixFull = []
+        matrixGroup = []
+        classResponse = []
+        indexClass = 1
+        for files in listFiles:
+            dataFrame = pd.read_csv(files)
+
+            #armamos la matriz completa
+            for i in range(len(dataFrame)):
+                row = []
+                for key in dataFrame:
+                    row.append(dataFrame[key][i])#formamos la fila
+                classResponse.append(indexClass)
+                matrixGroup.append(row)
+
+            indexClass+=1
+
+        #formamos el conjunto de datos para el entrenamiento del modelo de clasificacion
+        dataFrameExport = pd.DataFrame(matrixGroup, columns=dataFrame.keys())
+
+        #codificacion del conjunto de datos
+        encoding = encodingFeatures.encodingFeatures(dataFrameExport, 20)
+        encoding.evaluEncoderKind()
+        dataSetNewFreq = encoding.dataSet
+
+        clusteringPerformance = evaluationClustering.evaluationClustering(dataSetNewFreq, classResponse)
+        print "Calinski Performance: ", clusteringPerformance.calinski
+        print "Silhouette score: ", clusteringPerformance.siluetas
+
+        dataFrameExport['classGroup'] = classResponse
+        dataFrameExport.to_csv(pathResponse+"fullDataSetWith.csv", index=False)
