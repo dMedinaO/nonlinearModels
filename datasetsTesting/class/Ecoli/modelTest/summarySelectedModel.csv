@@ -1,0 +1,3 @@
+Algorithm,Params,Validation,Accuracy,Recall,Precision,F1
+RandomForestClassifier,n_estimators:10-criterion:entropy-min_samples_split:2-min_samples_leaf:1-bootstrap:True,CV-10,0.8696411416725655,0.8753784718711026,0.8741875383123665,0.8453869452372877
+GaussianNB,Default,CV-10,0.8750888824282873,0.8750888824282873,0.896894544410717,0.8740885559519358

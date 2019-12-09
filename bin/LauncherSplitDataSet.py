@@ -5,7 +5,7 @@ import random
 parser = argparse.ArgumentParser()
 parser.add_argument("-d", "--dataSet", help="full path and name to acces dataSet input process", required=True)
 parser.add_argument("-p", "--pathResult", help="full path for save results", required=True)
-parser.add_argument("-v", "--valueProportion", help="Percentage of training data set, Default 80%", default=80, type=float)
+parser.add_argument("-v", "--valueProportion", help="Percentage of training data set, Default 80", default=80.0, type=float)
 
 args = parser.parse_args()
 

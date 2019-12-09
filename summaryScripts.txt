@@ -93,4 +93,40 @@ optional arguments:
   -s INITIALSIZE, --initialSize INITIALSIZE
                         initial Size of dataset
 
-                        
+Etapa 4: Entrenar modelo de clasificacion para particiones, recibe el conjunto de datos resultado del launcherClusteringScan.py y
+entrena un modelo, reporta las medidas de desempeno y genera multiples modelos, puede seleccionar cualquiera, ya que todos son
+los mejores en su area.
+
+Script: LauncherTrainingModelPartitions.py
+
+usage: LauncherTrainingModelPartitions.py [-h] -d DATASET -p PATHRESULT -r
+                                          RESPONSE [-k KVALUEDATA]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d DATASET, --dataSet DATASET
+                        full path and name to acces dataSet input process
+  -p PATHRESULT, --pathResult PATHRESULT
+                        full path for save results
+  -r RESPONSE, --response RESPONSE
+                        name of column with response values in dataset
+  -k KVALUEDATA, --kValueData KVALUEDATA
+                        Value for cross validation, this value most be higher
+                        or equal 2
+
+Etapa 0tros: Dividir conjunto de datos en validacion y testeo, recibe como input el % de division y genera la data
+en dos conjuntos de datos
+
+Script LauncherSplitDataSet.py
+
+usage: LauncherSplitDataSet.py [-h] -d DATASET -p PATHRESULT
+                               [-v VALUEPROPORTION]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d DATASET, --dataSet DATASET
+                        full path and name to acces dataSet input process
+  -p PATHRESULT, --pathResult PATHRESULT
+                        full path for save results
+  -v VALUEPROPORTION, --valueProportion VALUEPROPORTION
+                        Percentage of training data set, Default 80
