@@ -21,7 +21,7 @@ optional arguments:
   --feature FEATURE, -f FEATURE
                         Name of feature with response in dataset
 
-El threshold sirve para evaluar la linealidad del metodo, por default se utiliza 0.7 en la performance de Precission (modelos de clasificacion) o R score (modelos de regresion) de los modelos. Se recomiendan valores desde dicho umbral, ya que, a mayor precision, mejor es la calidad del modelo. 
+El threshold sirve para evaluar la linealidad del metodo, por default se utiliza 0.7 en la performance de Precission (modelos de clasificacion) o R score (modelos de regresion) de los modelos. Se recomiendan valores desde dicho umbral, ya que, a mayor precision, mejor es la calidad del modelo.
 
 Retorna 0 si el conjunto de datos presenta respuesta no lineal
         1 en caso de que fuera lineal
@@ -68,4 +68,29 @@ optional arguments:
                         threshold of minimus values expected form model
                         generated
 
+Etapa 3: Dividir conjunto de datos en sub conjuntos empleando metodo recursivo de division propuesto, emplea y
+valida las mejores divisiones generadas y obtiene los resultados. Se recomienda usar con un directorio exclusivo
+para almacenar las particiones. Como output genera los archivos csv con la data original ademas de la estructura
+de arbol con la visualizacion de las particiones
 
+Script: launcherClusteringScan.py
+
+usage: launcherClusteringScan.py [-h] -d DATASET -p PATHRESULT -r RESPONSE -k
+                                 {1,2} -t THRESHOLD -s INITIALSIZE
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d DATASET, --dataSet DATASET
+                        full path and name to acces dataSet input process
+  -p PATHRESULT, --pathResult PATHRESULT
+                        full path for save results
+  -r RESPONSE, --response RESPONSE
+                        Name response in dataset
+  -k {1,2}, --kind {1,2}
+                        Kind of dataset: 1. Classification 2. Regression
+  -t THRESHOLD, --threshold THRESHOLD
+                        threshold for umbalanced class
+  -s INITIALSIZE, --initialSize INITIALSIZE
+                        initial Size of dataset
+
+                        
