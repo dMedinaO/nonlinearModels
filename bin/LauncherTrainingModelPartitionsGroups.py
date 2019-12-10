@@ -8,7 +8,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("-p", "--pathInput", help="Path where is all data set created using clustering partitions", required=True)
 parser.add_argument("-r", "--response", help="name of column with response values in dataset", required=True)
-parser.add_argument("-k", "--kValueData", type=int, help="Value for cross validation, this value most be higher or equal 2", default=5)
+parser.add_argument("-k", "--kValueData", type=int, help="Value for cross validation, this value most be higher or equal 2", default=2)
 parser.add_argument("-t", "--type", type=int, help="Type of response in dataset: 1. class, 2. prediction", choices=[1,2], required=True)
 
 args = parser.parse_args()

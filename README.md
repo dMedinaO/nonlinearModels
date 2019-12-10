@@ -114,9 +114,9 @@ optional arguments:
 If there are not any combination of parameter and algorithm that its performance is lower than threshold input. We recomender to use the methodology of splitter and training
 differents groups partitions. For this, you can apply the scripts exposed then.
 
-### First Stage: Encoding categorical features
+### 1. Encoding categorical features
 
-For encoding categorical features, you can use the scripts: LauncherEncodingClass.py, the output of scripts are: a dictionary in JSON format with values of categorical and its encoding. And, the dataset with categorical features changes by encoding process.
+For encoding categorical features, you can to use the scripts: LauncherEncodingClass.py, the output of scripts are: a dictionary in JSON format with values of categorical and its encoding. And, the dataset with categorical features changes by encoding process.
 
 ```
 usage: LauncherEncodingClass.py [-h] -d DATASET -p PATH
@@ -129,5 +129,77 @@ optional arguments:
 
 ```
 
+### 2. Split dataset using recursive binary strategy
+
+For split dataset, you can to use the scripts: launcherClusteringScan.py, the output of scripts are: csv files with examples in divisions, dataset with categories associated to ID of groups, and representations of division in a image.
+
+```
+usage: launcherClusteringScan.py [-h] -d DATASET -p PATHRESULT -r RESPONSE -k
+                                 {1,2} -t THRESHOLD -s INITIALSIZE
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d DATASET, --dataSet DATASET
+                        full path and name to acces dataSet input process
+  -p PATHRESULT, --pathResult PATHRESULT
+                        full path for save results
+  -r RESPONSE, --response RESPONSE
+                        Name response in dataset
+  -k {1,2}, --kind {1,2}
+                        Kind of dataset: 1. Classification 2. Regression
+  -t THRESHOLD, --threshold THRESHOLD
+                        threshold for umbalanced class
+  -s INITIALSIZE, --initialSize INITIALSIZE
+                        initial Size of dataset
+```
+
+### 3. Training models for to classifier in partitions
+
+After to create a partitions, you must to training a dataset for to classify examples in a group of partitions, for this, you can use the script LauncherTrainingModelPartitions.py
+
+```
+usage: LauncherTrainingModelPartitions.py [-h] -d DATASET -p PATHRESULT -r
+                                          RESPONSE [-k KVALUEDATA]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d DATASET, --dataSet DATASET
+                        full path and name to acces dataSet input process
+  -p PATHRESULT, --pathResult PATHRESULT
+                        full path for save results
+  -r RESPONSE, --response RESPONSE
+                        name of column with response values in dataset
+  -k KVALUEDATA, --kValueData KVALUEDATA
+                        Value for cross validation, this value most be higher
+                        or equal 2
+```
+
+The script will create a model to classify examples in a class group, We recommender that you create a directory for save the results of this script.
+
+NOTE: Please remember to use the dataset with categorical features encoding
+
+### 4. To training different partitions using supervised learning algorithms
+
+In the next stage, it is necessesary training models for all groups, created, for this, you can to use the scripts: LauncherTrainingModelPartitionsGroups.py
+
+```
+usage: LauncherTrainingModelPartitionsGroups.py [-h] -p PATHINPUT -r RESPONSE
+                                                [-k KVALUEDATA] -t {1,2}
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -p PATHINPUT, --pathInput PATHINPUT
+                        Path where is all data set created using clustering
+                        partitions
+  -r RESPONSE, --response RESPONSE
+                        name of column with response values in dataset
+  -k KVALUEDATA, --kValueData KVALUEDATA
+                        Value for cross validation, this value most be higher
+                        or equal 2
+  -t {1,2}, --type {1,2}
+                        Type of response in dataset: 1. class, 2. prediction
+```
+
+The performance are reported in standard output
 
 If you want send comments, opinion or you find a bug in library, please notify to via email: david.medina@cebib.cl
