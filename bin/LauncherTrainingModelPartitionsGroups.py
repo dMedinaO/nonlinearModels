@@ -51,34 +51,36 @@ for files in listFiles:
 
     os.system(command)
 
-    #procesamos las medidas de desempeno...
-    dataFrame = pd.read_csv(pathResponse+"summarySelectedModel.csv")
+    try:
+        #procesamos las medidas de desempeno...
+        dataFrame = pd.read_csv(pathResponse+"summarySelectedModel.csv")
 
-    performanceGroup = []
+        performanceGroup = []
 
-    #agregamos el largo
-    dataSetInput = pd.read_csv(dataSet)
-    performanceGroup.append(len(dataSetInput))
-    totalExamples+=len(dataSetInput)
+        #agregamos el largo
+        dataSetInput = pd.read_csv(dataSet)
+        performanceGroup.append(len(dataSetInput))
+        totalExamples+=len(dataSetInput)
 
-    #agregamos el ID del grupo
-    performanceGroup.append(ID_dataset)
+        #agregamos el ID del grupo
+        performanceGroup.append(ID_dataset)
 
-    #obtenemos los promedios...
-    if args.type == 1:
-        performanceGroup.append(np.mean(dataFrame['Accuracy']))#2
-        performanceGroup.append(np.mean(dataFrame['Recall']))#3
-        performanceGroup.append(np.mean(dataFrame['Precision']))#4
-        performanceGroup.append(np.mean(dataFrame['F1']))#5
-    else:
-        performanceGroup.append(np.mean(dataFrame['R_Score']))
-        performanceGroup.append(np.mean(dataFrame['Pearson']))
-        performanceGroup.append(np.mean(dataFrame['Spearman']))
-        performanceGroup.append(np.mean(dataFrame['Kendalltau']))
+        #obtenemos los promedios...
+        if args.type == 1:
+            performanceGroup.append(np.mean(dataFrame['Accuracy']))#2
+            performanceGroup.append(np.mean(dataFrame['Recall']))#3
+            performanceGroup.append(np.mean(dataFrame['Precision']))#4
+            performanceGroup.append(np.mean(dataFrame['F1']))#5
+        else:
+            performanceGroup.append(np.mean(dataFrame['R_Score']))
+            performanceGroup.append(np.mean(dataFrame['Pearson']))
+            performanceGroup.append(np.mean(dataFrame['Spearman']))
+            performanceGroup.append(np.mean(dataFrame['Kendalltau']))
 
-    #agregamos la data a la matriz
-    performanceTraining.append(performanceGroup)
-
+        #agregamos la data a la matriz
+        performanceTraining.append(performanceGroup)
+    except:
+        pass
 #obtenemos las performance ponderadas del entrenamiento
 p1=0
 p2=0

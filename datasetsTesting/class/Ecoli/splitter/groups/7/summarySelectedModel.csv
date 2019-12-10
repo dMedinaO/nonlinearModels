@@ -1,0 +1,4 @@
+Algorithm,Params,Validation,Accuracy,Recall,Precision,F1
+Bagging,bootstrap:True-n_estimators:10,CV-10,0.788333333333,0.966666666667,0.921666666667,0.884920634921
+DecisionTree,criterion:entropy-splitter:best,CV-10,0.813333333333,0.875,0.95,0.892857142857
+GaussianNB,Default,CV-10,0.871666666667,0.966666666667,0.905,0.926031746032

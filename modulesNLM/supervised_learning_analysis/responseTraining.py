@@ -29,7 +29,7 @@ class responseTraining(object):
     def __init__(self, clf, algorithm, params, validation):
 
         self.clf = clf
-        self.ListScore = ['accuracy', 'recall', 'precision', 'f1']
+        self.ListScore = ['precision'] #['accuracy']#, 'precision']#, 'f1']#'recall',
         self.ftwo_scorer = make_scorer(fbeta_score, beta=2)
 
         self.algorithm = algorithm
@@ -77,8 +77,14 @@ class responseTraining(object):
         self.scoreData.append(self.validation)
 
         for element in self.ListScore:
-            scores = cross_val_score(self.clf, dataInput, dataClass, cv=self.validation, scoring=element)
-            meanScore = np.mean(scores)
-            self.scoreData.append(meanScore)
 
-        self.scoreData.append(meanScore)
+            try:
+                scores = cross_val_score(self.clf, dataInput, dataClass, cv=self.validation, scoring=element)
+                meanScore = np.mean(scores)
+                self.scoreData.append(meanScore)
+
+            except:
+                print element
+                self.scoreData.append(accuracy_score(dataClass, self.clf.predict(dataInput)))
+                pass
+        print len(self.scoreData)

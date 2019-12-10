@@ -79,7 +79,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-d", "--dataSet", help="full path and name to acces dataSet input process", required=True)
 parser.add_argument("-p", "--pathResult", help="full path for save results", required=True)
 parser.add_argument("-r", "--response", help="name of column with response values in dataset", required=True)
-parser.add_argument("-k", "--kValueData", type=int, help="Value for cross validation, this value most be higher or equal 2", default=10)
+parser.add_argument("-k", "--kValueData", type=int, help="Value for cross validation, this value most be higher or equal 2", default=3)
 
 args = parser.parse_args()
 
@@ -163,20 +163,20 @@ if (processData.validatePath(args.pathResult) == 0):
         #AdaBoost
         for algorithm in ['SAMME', 'SAMME.R']:
             for n_estimators in [10]:#,50,100,200,500,1000,1500,2000]:
-                try:
-                    print "Excec AdaBoost with %s - %d" % (algorithm, n_estimators)
-                    AdaBoostObject = AdaBoost.AdaBoost(data, target, n_estimators, algorithm, kValueData)
-                    AdaBoostObject.trainingMethod(kindDataSet)
-                    params = "Algorithm:%s-n_estimators:%d" % (algorithm, n_estimators)
-                    row = ["AdaBoostClassifier", params, validation, AdaBoostObject.performanceData.scoreData[3], AdaBoostObject.performanceData.scoreData[4], AdaBoostObject.performanceData.scoreData[5], AdaBoostObject.performanceData.scoreData[6]]
-                    matrixResponse.append(row)
-                    iteracionesCorrectas+=1
-                    print row
-                    matrixModelData.append(AdaBoostObject.AdaBoostAlgorithm)
-                    break
-                except:
-                    iteracionesIncorrectas+=1
-                    pass
+                #try:
+                print "Excec AdaBoost with %s - %d" % (algorithm, n_estimators)
+                AdaBoostObject = AdaBoost.AdaBoost(data, target, n_estimators, algorithm, kValueData)
+                AdaBoostObject.trainingMethod(kindDataSet)
+                params = "Algorithm:%s-n_estimators:%d" % (algorithm, n_estimators)
+                row = ["AdaBoostClassifier", params, validation, AdaBoostObject.performanceData.scoreData[3], AdaBoostObject.performanceData.scoreData[4], AdaBoostObject.performanceData.scoreData[5], AdaBoostObject.performanceData.scoreData[6]]
+                matrixResponse.append(row)
+                iteracionesCorrectas+=1
+                print row
+                matrixModelData.append(AdaBoostObject.AdaBoostAlgorithm)
+                break
+                #except:
+                #    iteracionesIncorrectas+=1
+                #    pass
 
         #Baggin
         for bootstrap in [True, False]:
@@ -305,44 +305,44 @@ if (processData.validatePath(args.pathResult) == 0):
                         iteracionesIncorrectas+=1
                         pass
 
-        #try:
-        #generamos el export de la matriz convirtiendo a data frame
-        dataFrame = pd.DataFrame(matrixResponse, columns=header)
+        try:
+            #generamos el export de la matriz convirtiendo a data frame
+            dataFrame = pd.DataFrame(matrixResponse, columns=header)
 
-        #obtenemos el mayor de cada medida de desempeno
-        maxAccuracy = max(dataFrame['Accuracy'])
-        maxPrecision = max(dataFrame['Precision'])
-        maxRecall = max(dataFrame['Recall'])
-        maxF1 = max(dataFrame['F1'])
+            #obtenemos el mayor de cada medida de desempeno
+            maxAccuracy = max(dataFrame['Accuracy'])
+            maxPrecision = max(dataFrame['Precision'])
+            maxRecall = max(dataFrame['Recall'])
+            maxF1 = max(dataFrame['F1'])
 
-        #buscamos la pocision del mayor y armamos un csv con la data de cada uno, ademas exportamos los modelos asociados
-        indexAccuracy = getIndexForMaxValues(dataFrame, maxAccuracy, 'Accuracy')
-        indexPrecision = getIndexForMaxValues(dataFrame, maxPrecision, 'Precision')
-        indexRecall = getIndexForMaxValues(dataFrame, maxRecall, 'Recall')
-        indexF1 = getIndexForMaxValues(dataFrame, maxF1, 'F1')
+            #buscamos la pocision del mayor y armamos un csv con la data de cada uno, ademas exportamos los modelos asociados
+            indexAccuracy = getIndexForMaxValues(dataFrame, maxAccuracy, 'Accuracy')
+            indexPrecision = getIndexForMaxValues(dataFrame, maxPrecision, 'Precision')
+            indexRecall = getIndexForMaxValues(dataFrame, maxRecall, 'Recall')
+            indexF1 = getIndexForMaxValues(dataFrame, maxF1, 'F1')
 
-        indexList = [indexAccuracy, indexPrecision, indexRecall, indexF1]
-        indexList = list(set(indexList))
+            indexList = [indexAccuracy, indexPrecision, indexRecall, indexF1]
+            indexList = list(set(indexList))
 
-        matrixSelected = []
-        for index in indexList:
+            matrixSelected = []
+            for index in indexList:
 
-            #exportamos el modelo en formato joblib
-            nameModel = pathResponse+"ModelExport"+str(index)+".joblib"
-            dump(matrixModelData[index], nameModel)
+                #exportamos el modelo en formato joblib
+                nameModel = pathResponse+"ModelExport"+str(index)+".joblib"
+                dump(matrixModelData[index], nameModel)
 
-            row = []
-            for key in header:
-                row.append(dataFrame[key][index])
-            matrixSelected.append(row)
+                row = []
+                for key in header:
+                    row.append(dataFrame[key][index])
+                matrixSelected.append(row)
 
-        #exportamos los resumenes
-        dataExport = pd.DataFrame(matrixSelected, columns=header)
-        dataExport.to_csv(pathResponse+"summarySelectedModel.csv", index=False)
+            #exportamos los resumenes
+            dataExport = pd.DataFrame(matrixSelected, columns=header)
+            dataExport.to_csv(pathResponse+"summarySelectedModel.csv", index=False)
 
-        print dictTransform
-        #except:
-        #    print "Error during exec program"
+            print dictTransform
+        except:
+            print "Error during exec program"
     else:
         print "Data set input not exist, please check the input for name file data set"
 else:
