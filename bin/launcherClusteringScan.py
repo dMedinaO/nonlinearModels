@@ -154,10 +154,10 @@ if (processData.validatePath(args.pathResult) == 0):
         matrixFull = []
         matrixGroup = []
         classResponse = []
-        indexClass = 1
+
         for files in listFiles:
             dataFrame = pd.read_csv(files)
-
+            indexClass = files.split("/")[-1].split(".")[0]
             #armamos la matriz completa
             for i in range(len(dataFrame)):
                 row = []
@@ -166,10 +166,9 @@ if (processData.validatePath(args.pathResult) == 0):
                 classResponse.append(indexClass)
                 matrixGroup.append(row)
 
-            indexClass+=1
-
         #formamos el conjunto de datos para el entrenamiento del modelo de clasificacion
         dataFrameExport = pd.DataFrame(matrixGroup, columns=dataFrame.keys())
+        del dataFrameExport[args.response]#eliminamos la columna respuesta
 
         #codificacion del conjunto de datos
         encoding = encodingFeatures.encodingFeatures(dataFrameExport, 20)

@@ -110,8 +110,9 @@ if (processData.validatePath(args.pathResult) == 0):
         #transformamos la clase si presenta atributos discretos
         transformData = transformDataClass.transformClass(target)
         target = transformData.transformData
-        dictTransform = transformData.dictTransform
+        dictTransform = transformData.dictTransform#debo exportarlo...
         classArray = list(set(target))#evaluamos si es arreglo binario o no
+        print dictTransform
 
         kindDataSet = 1
 
@@ -329,6 +330,7 @@ if (processData.validatePath(args.pathResult) == 0):
         dataExport = pd.DataFrame(matrixSelected, columns=header)
         dataExport.to_csv(pathResponse+"summarySelectedModel.csv", index=False)
 
+        print dictTransform
         #except:
         #    print "Error during exec program"
     else:
