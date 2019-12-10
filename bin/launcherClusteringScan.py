@@ -44,6 +44,7 @@ import pandas as pd
 import argparse
 import time
 import glob
+import os
 
 class Nodo(object):
     def __init__(self, data):
@@ -146,7 +147,7 @@ if (processData.validatePath(args.pathResult) == 0):
         #Nodo raiz con la informacion del dataSet inicial
         tree.insert(dataSet)
         tree.split(tree.top,dataSet, pathResponse, optionNormalize, featureClass, kindDataSet, threshold, initialSize)
-        tree.diagramSplit(pathResponse)
+        #tree.diagramSplit(pathResponse)
 
         #una vez procesada la data... para cada elemento en formato csv en el path response... lo leemos
         listFiles = glob.glob(pathResponse+"*.csv")
@@ -155,9 +156,13 @@ if (processData.validatePath(args.pathResult) == 0):
         matrixGroup = []
         classResponse = []
 
+        #creamos un directorio donde se almacenaran los resultados de los archivos
+        command = "mkdir -p %sgroups" % pathResponse
+        os.system(command)
+
+        indexClass = 1
         for files in listFiles:
             dataFrame = pd.read_csv(files)
-            indexClass = files.split("/")[-1].split(".")[0]
             #armamos la matriz completa
             for i in range(len(dataFrame)):
                 row = []
@@ -165,6 +170,12 @@ if (processData.validatePath(args.pathResult) == 0):
                     row.append(dataFrame[key][i])#formamos la fila
                 classResponse.append(indexClass)
                 matrixGroup.append(row)
+
+            #cambiamos el nombre del archivo
+            command = "mv %s %sgroups/%d.csv" % (files, pathResponse, indexClass)
+            os.system(command)
+
+            indexClass+=1
 
         #formamos el conjunto de datos para el entrenamiento del modelo de clasificacion
         dataFrameExport = pd.DataFrame(matrixGroup, columns=dataFrame.keys())

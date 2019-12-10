@@ -112,7 +112,17 @@ if (processData.validatePath(args.pathResult) == 0):
         target = transformData.transformData
         dictTransform = transformData.dictTransform#debo exportarlo...
         classArray = list(set(target))#evaluamos si es arreglo binario o no
-        print dictTransform
+
+        #exportamos el diccionario en formato csv con las clases y codificacion generada
+        matrixTransform = []
+
+        for key in dictTransform:
+            row = [key, dictTransform[key]]
+            matrixTransform.append(row)
+
+        #creamos el dataFrame con la informacion
+        dataExportTranform = pd.DataFrame(matrixTransform, columns=['class', 'encoding'])
+        dataExportTranform.to_csv(pathResponse+"encodingClass.csv", index=False)
 
         kindDataSet = 1
 
