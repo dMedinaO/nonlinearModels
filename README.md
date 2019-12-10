@@ -64,6 +64,70 @@ In a second stage, if the evaluation of the dataset response that it is not line
 get performances. The scripts are: LauncherexploreRegressionModels.py | LauncherExploratoryClassifierModels.py, the use of each one, depends if response in dataset is
 categorical/discrete or continue.
 
+When response in dataset is continue type: you could to use LauncherexploreRegressionModels.py:
+
+```
+usage: LauncherexploreRegressionModels.py [-h] -d DATASET -p PATHRESULT -m
+                                          PERFORMANCE -r RESPONSE -t THRESHOLD
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d DATASET, --dataSet DATASET
+                        full path and name to acces dataSet input process
+  -p PATHRESULT, --pathResult PATHRESULT
+                        full path for save results
+  -m PERFORMANCE, --performance PERFORMANCE
+                        performance selected model
+  -r RESPONSE, --response RESPONSE
+                        name of column with response values in dataset
+  -t THRESHOLD, --threshold THRESHOLD
+                        threshold of minimus values expected form model
+                        generated
+```
+
+In case of dataset has categorical or discrete response, you could use LauncherExploratoryClassifierModels.py:
+
+```
+usage: LauncherExploratoryClassifierModels.py [-h] -d DATASET -p PATHRESULT -m
+                                              PERFORMANCE -r RESPONSE -t
+                                              THRESHOLD -k KVALUEDATA
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d DATASET, --dataSet DATASET
+                        full path and name to acces dataSet input process
+  -p PATHRESULT, --pathResult PATHRESULT
+                        full path for save results
+  -m PERFORMANCE, --performance PERFORMANCE
+                        performance selected model
+  -r RESPONSE, --response RESPONSE
+                        name of column with response values in dataset
+  -t THRESHOLD, --threshold THRESHOLD
+                        threshold of minimus values expected form model
+                        generated
+  -k KVALUEDATA, --kValueData KVALUEDATA
+                        Value for cross validation, this value most be higher
+                        or equal 2
+
+```
+
+If there are not any combination of parameter and algorithm that its performance is lower than threshold input. We recomender to use the methodology of splitter and training
+differents groups partitions. For this, you can apply the scripts exposed then.
+
+### First Stage: Encoding categorical features
+
+For encoding categorical features, you can use the scripts: LauncherEncodingClass.py, the output of scripts are: a dictionary in JSON format with values of categorical and its encoding. And, the dataset with categorical features changes by encoding process.
+
+```
+usage: LauncherEncodingClass.py [-h] -d DATASET -p PATH
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d DATASET, --dataSet DATASET
+                        full path and name to acces dataSet input process
+  -p PATH, --path PATH  path to save dataset transform
+
+```
 
 
 If you want send comments, opinion or you find a bug in library, please notify to via email: david.medina@cebib.cl
