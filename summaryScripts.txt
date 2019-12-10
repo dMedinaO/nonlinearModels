@@ -114,6 +114,32 @@ optional arguments:
                         Value for cross validation, this value most be higher
                         or equal 2
 
+Etapa 5: Entrenar modelos para las particiones, recibe el directorio donde se encuentran los archivos que se producen en la division
+de los elementos a partir de la estrategia propuesta, produce los modelos y un archivo resumen con las medidas de desempeno, las
+medidas ponderadas se reportan en terminal
+
+Script: LauncherTrainingModelPartitionsGroups.py
+
+usage: LauncherTrainingModelPartitionsGroups.py [-h] -p PATHINPUT -r RESPONSE
+                                                [-k KVALUEDATA] -t {1,2}
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -p PATHINPUT, --pathInput PATHINPUT
+                        Path where is all data set created using clustering
+                        partitions
+  -r RESPONSE, --response RESPONSE
+                        name of column with response values in dataset
+  -k KVALUEDATA, --kValueData KVALUEDATA
+                        Value for cross validation, this value most be higher
+                        or equal 2
+  -t {1,2}, --type {1,2}
+                        Type of response in dataset: 1. class, 2. prediction
+
+
+
+
+
 Etapa 0tros: Dividir conjunto de datos en validacion y testeo, recibe como input el % de division y genera la data
 en dos conjuntos de datos
 
