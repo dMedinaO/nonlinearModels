@@ -1,2 +1,2 @@
 Algorithm,Params,Validation,Accuracy,Recall,Precision,F1
-AdaBoostClassifier,Algorithm:SAMME-n_estimators:10,LOU,0.989130434783,0.0,0.0,0.0
+AdaBoostClassifier,Algorithm:SAMME-n_estimators:10,LOU,0.9891304347826086,0.0,0.0,0.0

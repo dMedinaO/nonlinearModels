@@ -200,6 +200,53 @@ optional arguments:
                         Type of response in dataset: 1. class, 2. prediction
 ```
 
-The performance are reported in standard output
+The performance are reported in standard output.
+
+### 5. To get performance of meta-models
+
+The finish stage is To get performance of meta-models, the performance are reported in standard output, for this, you can to use the scripts: LauncherUseValidationDataSet.py
+
+```
+usage: LauncherUseValidationDataSet.py [-h] -m MODELPARTITION -d DATASET -r
+                                       RESPONSE -p PATHMODELS -t {1,2}
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -m MODELPARTITION, --modelPartition MODELPARTITION
+                        Model created for to classify in a partition (*.joblib
+                        file)
+  -d DATASET, --dataset DATASET
+                        Data set validation
+  -r RESPONSE, --response RESPONSE
+                        Name of feature response in dataset
+  -p PATHMODELS, --pathModels PATHMODELS
+                        Path models of partitions
+  -t {1,2}, --type {1,2}
+                        Type of model: 1. Class, 2. Regression
+
+```
+
+### 6. To use meta-models for predict new examples
+
+Finally, you can use the models trainined for to classify new examples, for this reasson, you can use the script: LauncherUseModelsNewExamples.py, the predictions are reporte in standard output, and are encoding using the JSON file
+
+```
+usage: LauncherUseModelsNewExamples.py [-h] -m MODELPARTITION -d DATASET -p
+                                       PATHMODELS -t {1,2}
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -m MODELPARTITION, --modelPartition MODELPARTITION
+                        Model created for to classify in a partition (*.joblib
+                        file)
+  -d DATASET, --dataset DATASET
+                        Data set validation
+  -p PATHMODELS, --pathModels PATHMODELS
+                        Path models of partitions
+  -t {1,2}, --type {1,2}
+                        Type of model: 1. Class, 2. Regression
+  -j JSONENCODING --jsonencoding JSONENCODING
+                        JSON File with encoding features applied in training model
+```
 
 If you want send comments, opinion or you find a bug in library, please notify to via email: david.medina@cebib.cl

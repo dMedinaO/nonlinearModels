@@ -1,2 +1,3 @@
 Algorithm,Params,Validation,Accuracy,Recall,Precision,F1
-AdaBoostClassifier,Algorithm:SAMME-n_estimators:10,LOU,0.777777777778,0.777777777778,0.777777777778,0.777777777778
+AdaBoostClassifier,Algorithm:SAMME-n_estimators:10,LOU,0.8333333333333334,0.7777777777777778,0.7777777777777778,0.8333333333333334
+RandomForestClassifier,n_estimators:10-criterion:entropy-min_samples_split:2-min_samples_leaf:1-bootstrap:True,LOU,0.7777777777777778,0.8333333333333334,0.7777777777777778,0.7777777777777778

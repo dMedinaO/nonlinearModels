@@ -19,7 +19,6 @@ from sklearn.metrics import accuracy_score, cohen_kappa_score, f1_score, precisi
 parser = argparse.ArgumentParser()
 parser.add_argument("-m", "--modelPartition", help="Model created for to classify in a partition (*.joblib file)", required=True)
 parser.add_argument("-d", "--dataset", help="Data set validation", required=True)
-parser.add_argument("-r", "--response", help="Name of feature response in dataset", required=True)
 parser.add_argument("-p", "--pathModels", help="Path models of partitions", required=True)
 parser.add_argument("-t", "--type", type=int, help="Type of model: 1. Class, 2. Regression", choices=[1,2], required=True)
 
@@ -27,11 +26,6 @@ args = parser.parse_args()
 
 #primero, se hace la lectura del conjunto de datos recibido
 dataset = pd.read_csv(args.dataset)
-
-#preparamos el conjunto: removemos la columna respuesta, codificamos y estandarizamos
-responseReal = dataset[args.response]
-
-del dataset[args.response]
 
 #estandarizar
 applyNormal = ScaleNormalScore.applyNormalScale(dataset)
@@ -92,27 +86,5 @@ for i in range(len(classResponses)):
                 responsePredictedModel.append(int(key))
                 break
 
-#con ambos vectores... obtenemos las medidas de desempeno que corresponden
-if args.type == 1:
-
-    accuracy = accuracy_score(responseReal, responsePredictedModel)
-    precision = precision_score(responseReal, responsePredictedModel)
-    recall = recall_score(responseReal, responsePredictedModel)
-    f1 = f1f1_score(responseReal, responsePredictedModel)
-
-    print "Performance in Model: "
-    print "Accuracy: ", accuracy
-    print "Precision: ", precision
-    print "Recall: ", recall
-    print "F1: ", f1
-    
-else:#predictive models
-    performance = performanceData.performancePrediction(responseReal, responsePredictedModel)
-    pearson = performance.calculatedPearson()
-    spearman = performance.calculatedSpearman()
-    kendall = performance.calculatekendalltau()
-
-    print "Performance in Model: "
-    print "Pearson coeficient ", pearson
-    print "Spearman ", spearman
-    print "Kendalltau ", kendalltau
+print "Predicted values: "
+print responsePredictedModel
