@@ -1,3 +1,3 @@
 Algorithm,Params,Validation,Accuracy,Recall,Precision,F1
-AdaBoostClassifier,Algorithm:SAMME-n_estimators:10,CV-10,0.875,0.0,0.0,0.0
-BernoulliNB,Default,CV-10,0.975,0.0,0.0,0.0
+AdaBoostClassifier,Algorithm:SAMME-n_estimators:10,LOU,0.869565217391,0.0,0.0,0.0
+BernoulliNB,Default,LOU,0.95652173913,0.0,0.0,0.0

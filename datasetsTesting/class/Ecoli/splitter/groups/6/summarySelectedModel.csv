@@ -1,2 +1,2 @@
 Algorithm,Params,Validation,Accuracy,Recall,Precision,F1
-AdaBoostClassifier,Algorithm:SAMME-n_estimators:10,LOU,1.0,1.0,1.0,1.0
+BernoulliNB,Default,LOU,0.931034482759,0.931034482759,0.931034482759,0.931034482759

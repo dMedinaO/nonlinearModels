@@ -87,19 +87,16 @@ p2=0
 p3=0
 p4=0
 for element in performanceTraining:
-    print element
 
     p1+= float(element[0])*float(element[2])/float(totalExamples)
     p2+= float(element[0])*float(element[3])/float(totalExamples)
     p3+= float(element[0])*float(element[4])/float(totalExamples)
     p4+= float(element[0])*float(element[5])/float(totalExamples)
 
+
 print "Performance Traing weighted:"
 if args.type == 1:
     print "Accuracy: ", p1
-    print "Recall: ", p2
-    print "Precision: ", p3
-    print "F1: ", p4
 else:
     print "R_Score: ", p1
     print "Pearson: ", p2

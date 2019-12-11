@@ -79,7 +79,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-d", "--dataSet", help="full path and name to acces dataSet input process", required=True)
 parser.add_argument("-p", "--pathResult", help="full path for save results", required=True)
 parser.add_argument("-r", "--response", help="name of column with response values in dataset", required=True)
-parser.add_argument("-k", "--kValueData", type=int, help="Value for cross validation, this value most be higher or equal 2", default=3)
+parser.add_argument("-k", "--kValueData", type=int, help="Value for cross validation, this value most be higher or equal 2", default=-1)
 
 args = parser.parse_args()
 
@@ -163,20 +163,20 @@ if (processData.validatePath(args.pathResult) == 0):
         #AdaBoost
         for algorithm in ['SAMME', 'SAMME.R']:
             for n_estimators in [10]:#,50,100,200,500,1000,1500,2000]:
-                #try:
-                print "Excec AdaBoost with %s - %d" % (algorithm, n_estimators)
-                AdaBoostObject = AdaBoost.AdaBoost(data, target, n_estimators, algorithm, kValueData)
-                AdaBoostObject.trainingMethod(kindDataSet)
-                params = "Algorithm:%s-n_estimators:%d" % (algorithm, n_estimators)
-                row = ["AdaBoostClassifier", params, validation, AdaBoostObject.performanceData.scoreData[3], AdaBoostObject.performanceData.scoreData[4], AdaBoostObject.performanceData.scoreData[5], AdaBoostObject.performanceData.scoreData[6]]
-                matrixResponse.append(row)
-                iteracionesCorrectas+=1
-                print row
-                matrixModelData.append(AdaBoostObject.AdaBoostAlgorithm)
-                break
-                #except:
-                #    iteracionesIncorrectas+=1
-                #    pass
+                try:
+                    print "Excec AdaBoost with %s - %d" % (algorithm, n_estimators)
+                    AdaBoostObject = AdaBoost.AdaBoost(data, target, n_estimators, algorithm, kValueData)
+                    AdaBoostObject.trainingMethod(kindDataSet)
+                    params = "Algorithm:%s-n_estimators:%d" % (algorithm, n_estimators)
+                    row = ["AdaBoostClassifier", params, validation, AdaBoostObject.performanceData.scoreData[3], AdaBoostObject.performanceData.scoreData[4], AdaBoostObject.performanceData.scoreData[5], AdaBoostObject.performanceData.scoreData[6]]
+                    matrixResponse.append(row)
+                    iteracionesCorrectas+=1
+                    print row
+                    matrixModelData.append(AdaBoostObject.AdaBoostAlgorithm)
+                    break
+                except:
+                    iteracionesIncorrectas+=1
+                    pass
 
         #Baggin
         for bootstrap in [True, False]:

@@ -30,24 +30,20 @@ responseReal = dataset[args.response]
 
 del dataset[args.response]
 
-#codificacion conjunto de datos sin clases
-encoding = encodingFeatures.encodingFeatures(dataset, 20)
-encoding.evaluEncoderKind()
-datasetEncoding = encoding.dataSet
-
 #estandarizar
-applyNormal = ScaleNormalScore.applyNormalScale(datasetEncoding)
+applyNormal = ScaleNormalScore.applyNormalScale(dataset)
 dataScaler = applyNormal.dataTransform
 
 #cargamos el modelo de la clasificacion de grupos y lo usamos para predecir que usar
 clfGroup = load(args.modelPartition)
-classResponses = clfGroup.predict(dataScaler)#obtenemos las predicciones
+classResponses = clfGroup.predict(dataScaler)#obtenemos las predicciones del grupo al que le corresponde
 
 responsePredictedModel = []
 
 for i in range(len(classResponses)):
+
     #obtenemos el ejemplo
-    matrixExample = []
+    matrixExample = []#la cosa queda en una matriz para que sea correcta la clasificacion
     example = []
     for element in dataScaler:
         example.append(dataScaler[element][i])
