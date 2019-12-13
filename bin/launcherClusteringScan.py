@@ -93,7 +93,7 @@ class BinaryTree(object):
     # Llamar funcion recursiva para dibujar arbol
     def diagramSplit(self, pathResult) :
         print "Imprimir"
-        tree = gp.Graph(format='png')
+        tree = gp.Graph(format='eps')
         if(self.top != None):
             self.draw(self.top,tree);
         # formatear pathResult quitando ultimo slash
@@ -136,7 +136,7 @@ if (processData.validatePath(args.pathResult) == 0):
         #recibimos los datos de entrada...
         dataSet = pd.read_csv(args.dataSet)
         pathResponse = args.pathResult
-        optionNormalize = 2
+        optionNormalize = 1
         featureClass = args.response
         kindDataSet = int(args.kind)
         threshold = float(args.threshold)
